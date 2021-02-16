@@ -280,6 +280,7 @@ static MAL_CAN_HandleTypeDef* MAL_CAN_RegToMhandle(uint32_t canNum)
 	return ret;
 }
 
+/*
 
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
@@ -296,6 +297,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 	}
 	//MAL_CAN_LED_On(&mcan->rxLed);
 }
+*/
 
 
 #endif

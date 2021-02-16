@@ -7,7 +7,6 @@
 
 #include "main.h"
 #include "mal_motor_acPanasonic.h"
-#include "mal_can_protocol_ani.h"
 #include "mal_motor.h"
 #include "mal_systimer.h"
 #include "math.h"

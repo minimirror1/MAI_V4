@@ -15,7 +15,7 @@
 #include "mal_systimer.h"
 #include "mal_motor_acPanasonic.h"
 #include "mal_motor.h"
-#include "mal_can_protocol_ani.h"
+
 #include "mal_board_info.h"
 #include "mal_motor_acPana232_v2.h"
 
@@ -144,10 +144,10 @@ void MAL_Motor_Init(void)
 	//MAL_Motor_CallBackInit(&mmotor[0], MAL_MOTOR_AC_PANASONIC );
 
 	MAL_Motor_CallBackInit(&mmotor[0], (uint32_t *)&mpanasonic, MAL_MOTOR_AC_PANASONIC );
-
+	/*
 	MAL_Motor_ManagerInit((uint32_t *)&mcan1);
 
-	MAL_LOOP_ProcessAddr(MAL_Protocol_Ani_Process);
+	MAL_LOOP_ProcessAddr(MAL_Protocol_Ani_Process);*/
 }
 
 void MAL_MOTOR_Panasonic_Init(void)

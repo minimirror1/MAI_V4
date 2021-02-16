@@ -15,6 +15,10 @@
 
 #ifdef HAL_CAN_MODULE_ENABLED
 
+#define PRIORITY_HIGH	0
+#define PRIORITY_LOW	1
+#define	MASTER_CAN_ID	0
+
 
 
 
@@ -116,6 +120,13 @@ extern uint8_t MAL_Motor_GetAxleNum(void);
 extern uint8_t MAL_Motor_GetAbsoStatus(uint8_t axleId);//20201103
 extern uint8_t MAL_Motor_GetAbsoStatusOk(uint8_t axleId);
 extern uint32_t MAL_Motor_GetAbsoCountOk(uint8_t axleId);
+
+// event alm
+void MAL_Protocol_Ani_EventBootAlm(void);
+void MAL_Protocol_Ani_AlmSensorDetection(uint8_t axleId, uint8_t cwSen, uint8_t ccwSen);
+void MAL_Protocol_Ani_RspAcAbsoBatteryOk(uint8_t axleId);
+void MAL_Protocol_Ani_RspDefPosi(uint8_t axleId, uint8_t initFlag);
+void MAL_Protocol_Ani_EventSensorDetect(uint8_t axleId, uint16_t value);
 #endif
 
 #endif /* INC_MAL_MOTOR_H_ */

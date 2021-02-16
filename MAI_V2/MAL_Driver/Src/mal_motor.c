@@ -6,6 +6,7 @@
  */
 
 #include "main.h"
+#include "mal_board_info.h"
 #include "mal_motor.h"
 #include "mal_motor_acPanasonic.h"
 #include "mal_motor_bldcMd.h"
@@ -184,5 +185,30 @@ uint32_t MAL_Motor_GetAbsoCountOk(uint8_t axleId)
 	return ret;
 }
 
+// event
+void MAL_Protocol_Ani_EventBootAlm(void)
+{
+	app_tx_init_sub_pid_boot_ctl(PRIORITY_HIGH, MAL_Board_ID_GetValue(), MASTER_CAN_ID, MOTOR_AXLE_CNT);
+}
+
+void MAL_Protocol_Ani_AlmSensorDetection(uint8_t axleId, uint8_t cwSen, uint8_t ccwSen)
+{
+
+}
+
+void MAL_Protocol_Ani_RspAcAbsoBatteryOk(uint8_t axleId)
+{
+
+}
+
+void MAL_Protocol_Ani_RspDefPosi(uint8_t axleId, uint8_t initFlag)
+{
+
+}
+
+void MAL_Protocol_Ani_EventSensorDetect(uint8_t axleId, uint16_t value)
+{
+
+}
 #endif
 
