@@ -9,7 +9,7 @@
 #include "main.h"
 
 #include "mal_sensor_limit.h"
-#include "mal_can_protocol_ani.h"
+
 
 
 MAL_SENSOR_LimitManagerHandleTypeDef msensorManger = {0,};
@@ -92,7 +92,7 @@ void MAL_SENSOR_LimitTrigger(MAL_SENSOR_Limit_HandleTypeDef *msensor)
 
 		msensor->status.f_newEvent = SET;
 
-		MAL_Protocol_Ani_EventSensorDetect(msensor->setting.id.sum, (uint16_t)msensor->status.new);
+		//MAL_Protocol_Ani_EventSensorDetect(msensor->setting.id.sum, (uint16_t)msensor->status.new);
 	}
 }
 

@@ -306,6 +306,8 @@ int main(void) {
 		/* USER CODE BEGIN 3 */
 
 		MAL_LOOP_ProcessHandler();
+		proc_can_rx();
+		proc_can_tx(&hcan1);
 
 
 		/*	  HAL_Delay(100);

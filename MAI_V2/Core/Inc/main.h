@@ -33,7 +33,35 @@ extern "C" {
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "mai_init.h"
+
+
+#define CAN_ID_MASTER 0
+
+/*************자신에 RAM버퍼에 따라 수정******************/
+#define CAN_Q_BUFF_SIZE 	512   //  ((헤더 4 Byte + 데이터 8 Byte) x 512(CAN_Q_BUFF_SIZE)) x 2(rx,tx) = 12,288 Byte
+/*************자신에 RAM버퍼에 따라 수정******************/
+#include "dl_can.h"
+#include "net_phd_pid.h"
+
+#include "app_pid_edit_cmd.h"
+#include "app_pid_error_cmd.h"
+#include "app_pid_error_cmd.h"
+#include "app_pid_init_cmd.h"
+#include "app_pid_init_cmd.h"
+#include "app_pid_init_cmd.h"
+#include "app_pid_midi_cmd.h"
+#include "app_pid_midi_cmd.h"
+#include "app_pid_motion_cmd.h"
+#include "app_pid_motion_cmd.h"
+#include "app_pid_sensor_cmd.h"
+#include "app_pid_speaker_cmd.h"
+
 /* USER CODE END Includes */
+
+
+
+
+
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */

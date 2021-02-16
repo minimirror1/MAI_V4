@@ -9,7 +9,7 @@
 #include "mal_motor.h"
 #include "mal_motor_bldcMd.h"
 #include "mal_motor_bldcMd_Protocol.h"
-#include "mal_can_protocol_ani.h"
+
 #include "mal_sensor_limit.h"
 #include "mal_systimer.h"
 #include "math.h"

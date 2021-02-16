@@ -281,7 +281,7 @@ static MAL_CAN_HandleTypeDef* MAL_CAN_RegToMhandle(uint32_t canNum)
 }
 
 
-void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
+/*void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
 	MAL_CAN_HandleTypeDef *mcan = MAL_CAN_RegToMhandle((uint32_t)hcan->Instance);
 
@@ -295,7 +295,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 			mcan->rxQueue.front = 0;
 	}
 	//MAL_CAN_LED_On(&mcan->rxLed);
-}
+}*/
 
 
 #endif

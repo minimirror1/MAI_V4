@@ -15,7 +15,7 @@
 #include "mal_systimer.h"
 #include "mal_motor_acPanasonic.h"
 #include "mal_motor.h"
-#include "mal_can_protocol_ani.h"
+
 #include "mal_board_info.h"
 #include "mal_motor_acPana232_v2.h"
 
@@ -114,7 +114,8 @@ void MAL_MAI_V1_Init(void)
 
 	MAL_LOOP_ProcessAddr(MAL_LED_process);
 
-	MAL_Protocol_Ani_EventBootAlm();
+	app_tx_init_sub_pid_boot_ctl(0, mboard.myCanId, CAN_ID_MASTER, 0);
+	//MAL_Protocol_Ani_EventBootAlm();
 }
 
 void MAL_Board_VerReg(void)
@@ -143,11 +144,11 @@ void MAL_Motor_Init(void)
 	//모터 구조체 초기화
 	//MAL_Motor_CallBackInit(&mmotor[0], MAL_MOTOR_AC_PANASONIC );
 
-	MAL_Motor_CallBackInit(&mmotor[0], (uint32_t *)&mpanasonic, MAL_MOTOR_AC_PANASONIC );
+/*	MAL_Motor_CallBackInit(&mmotor[0], (uint32_t *)&mpanasonic, MAL_MOTOR_AC_PANASONIC );
 
 	MAL_Motor_ManagerInit((uint32_t *)&mcan1);
 
-	MAL_LOOP_ProcessAddr(MAL_Protocol_Ani_Process);
+	MAL_LOOP_ProcessAddr(MAL_Protocol_Ani_Process);*/
 }
 
 void MAL_MOTOR_Panasonic_Init(void)
@@ -187,10 +188,14 @@ void MAL_UART_Init(void)
 void MAL_CAN_Init(void)
 {
 	MAL_CAN_FilterConfig(&hcan1);
+
+	//=================================
 	MAL_CAN_HandleMatching(&mcan1,&hcan1);
 
 	MAL_CAN_LEDInit(&mcan1.txLed, LED_2_GPIO_Port, LED_2_Pin, GPIO_PIN_RESET);
 	MAL_CAN_LEDInit(&mcan1.rxLed, LED_3_GPIO_Port, LED_3_Pin, GPIO_PIN_RESET);
+	//==================================
 
-	MAL_LOOP_ProcessAddr(MAL_CAN_Process);
+
+
 }

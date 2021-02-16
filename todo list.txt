@@ -1,0 +1,3 @@
+1. 기존 void MAL_Protocol_Ani_EventSensorDetect(uint8_t axleId, uint16_t value) 기능의 수현
+  - 기능 센서 감지시 이벤트로 감지된 센서 값을 송신함
+  기능 위치 mal_sensor_limit.c   line 95
