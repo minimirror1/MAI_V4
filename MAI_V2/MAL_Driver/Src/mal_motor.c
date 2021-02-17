@@ -87,28 +87,69 @@ void MAL_Motor_SetAllLocation(uint16_t location)
 		mmotor[i].mal_motor_setLocationCallBack(mmotor[i].ctrHandle, location);
 	}
 }
-void MAL_Motor_SetLocation(uint8_t axleId, uint16_t location)
+
+//=============================================================================================================
+/*void MAL_Motor_SetLocation(uint8_t axleId, uint16_t location)
 {
 	if (MOTOR_AXLE_CNT <= axleId) return;
 	//xxx 변경해야함
 	mmotor[axleId].mal_motor_setLocationCallBack(mmotor[axleId].ctrHandle, location);
-}
+}*/
+void app_rx_motion_sub_pid_adc_ctl(prtc_header_t *pPh, uint8_t *pData)
+{
+	uint8_t axleId;
+	uint16_t location;
 
-void MAL_Motor_SetBldcInfo(uint8_t axleId, uint16_t count, uint16_t rpm)
+	prtc_data_ctl_motion_adc_t *temp = (prtc_data_ctl_motion_adc_t *)pData;
+
+	axleId = pPh->sub_id;
+	location = temp->adc_val;
+
+	if (MOTOR_AXLE_CNT <= axleId) return;
+
+	MAL_Motor_AcPanasonic_SetLocation(mmotor[axleId].ctrHandle, location);
+}
+//=============================================================================================================
+
+/*void MAL_Motor_SetBldcInfo(uint8_t axleId, uint16_t count, uint16_t rpm)
 {
 	if (MOTOR_AXLE_CNT <= axleId) return;
 	mmotor[axleId].mal_motor_setBldcInfoCallBack(mmotor[axleId].ctrHandle, count, rpm);
 
 	motorManager.senInitFlag[axleId] = SET;
-}
+}*/
 
-void MAL_Motor_SetSetting(uint8_t axleId, uint8_t SensorDirection, uint16_t OppositeLimit, uint16_t DefaultLocation, uint8_t ReductionRatio)
+
+//=============================================================================================================
+/*void MAL_Motor_SetSetting(uint8_t axleId, uint8_t SensorDirection, uint16_t OppositeLimit, uint16_t DefaultLocation, uint8_t ReductionRatio)
 {
 	if (MOTOR_AXLE_CNT <= axleId) return;
 	mmotor[axleId].mal_motor_setSettingCallBack(mmotor[axleId].ctrHandle, SensorDirection, OppositeLimit, DefaultLocation, ReductionRatio);
 
 	motorManager.senInitFlag[axleId] = SET;
+}*/
+void app_rx_init_sub_pid_driver_data1_ctl(prtc_header_t *pPh, uint8_t *pData)
+{
+	uint8_t axleId;
+	uint8_t SensorDirection;
+	uint16_t OppositeLimit;
+	uint16_t DefaultLocation;
+	uint8_t ReductionRatio;
+
+	prtc_data_ctl_init_driver_data1_t *temp = (prtc_data_ctl_init_driver_data1_t *)pData;
+
+	axleId = pPh->sub_id;
+
+	SensorDirection = temp->direction;
+	OppositeLimit = temp->angle;
+	DefaultLocation = temp->init_position;
+	ReductionRatio = temp->reducer_ratio;
+
+	if (MOTOR_AXLE_CNT <= axleId) return;
+
+	MAL_Motor_AcPanasonic_SetSetting(mmotor[axleId].ctrHandle, SensorDirection, OppositeLimit, DefaultLocation, ReductionRatio);
 }
+//=============================================================================================================
 
 uint8_t MAL_Motor_SetSetting_Absolute(uint8_t axleId, uint8_t SensorDirection, uint16_t OppositeLimit, uint16_t DefaultLocation, uint8_t ReductionRatio)
 {
