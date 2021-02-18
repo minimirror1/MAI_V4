@@ -247,7 +247,7 @@ void MAL_Protocol_Ani_RspDefPosi(uint8_t axleId, uint8_t initFlag)
 
 }
 
-void MAL_Protocol_Ani_EventSensorDetect(uint8_t axleId, uint16_t value)
+void MAL_Protocol_Ani_EventSensorDetect(MAL_SENSOR_LimitIDTypeDef *axleId, uint16_t value)
 {
 
 }

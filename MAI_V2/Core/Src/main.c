@@ -165,6 +165,8 @@ int main(void) {
 	/* USER CODE BEGIN 2 */
 	MAL_MAI_V1_Init();
 
+	gm_motion_RX_LED_init(LED_2_GPIO_Port, LED_2_Pin, GPIO_PIN_RESET);
+	gm_motion_TX_LED_init(LED_3_GPIO_Port, LED_3_Pin, GPIO_PIN_RESET);
 
 	/* USER CODE END 2 */
 

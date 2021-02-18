@@ -101,6 +101,7 @@ void MAL_MAI_V1_Init(void)
 
     mboard.myCanId = MAL_Board_ID_GetValue();
 
+    my_can_id = MAL_Board_ID_GetValue();
 
 	MAL_Board_VerReg();
     MAL_CAN_Init();
@@ -189,8 +190,8 @@ void MAL_CAN_Init(void)
 	MAL_CAN_FilterConfig(&hcan1);
 	MAL_CAN_HandleMatching(&mcan1,&hcan1);
 
-	MAL_CAN_LEDInit(&mcan1.txLed, LED_2_GPIO_Port, LED_2_Pin, GPIO_PIN_RESET);
-	MAL_CAN_LEDInit(&mcan1.rxLed, LED_3_GPIO_Port, LED_3_Pin, GPIO_PIN_RESET);
+	//MAL_CAN_LEDInit(&mcan1.txLed, LED_2_GPIO_Port, LED_2_Pin, GPIO_PIN_RESET);
+	//MAL_CAN_LEDInit(&mcan1.rxLed, LED_3_GPIO_Port, LED_3_Pin, GPIO_PIN_RESET);
 
 	MAL_LOOP_ProcessAddr(MAL_CAN_Process);
 }
