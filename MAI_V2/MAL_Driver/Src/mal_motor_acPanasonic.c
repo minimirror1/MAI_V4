@@ -1022,7 +1022,7 @@ void MAL_Motor_AcPanasonic_ProcessSensorInit(MAL_MOTOR_PanasonicHandleTypeDef *p
 							pmpanasonic->setting.DefultLocTempCnt = 0;
 
 							//20201104 폴링응답하도록 삭제
-							//MAL_Protocol_Ani_RspSensorInitSuccess(pmpanasonic->status.axleNum,pmpanasonic->setting.absoCount);
+							MAL_Protocol_Ani_RspSensorInitSuccess(pmpanasonic->status.axleNum,pmpanasonic->setting.absoCount);
 						} else if (pmpanasonic->setting.SensorDirection == MAL_RO_CCW) {
 							pmpanasonic->status.position.now = 0;	// 모터값 초기화
 							pmpanasonic->status.position.target = 0; //타겟 위치를 일치시켜 모터를 정지시킴
@@ -1035,7 +1035,7 @@ void MAL_Motor_AcPanasonic_ProcessSensorInit(MAL_MOTOR_PanasonicHandleTypeDef *p
 							pmpanasonic->setting.DefultLocTemp = 0;
 							pmpanasonic->setting.DefultLocTempCnt = 0;
 
-							//MAL_Protocol_Ani_RspSensorInitSuccess(pmpanasonic->status.axleNum,pmpanasonic->setting.absoCount);
+							MAL_Protocol_Ani_RspSensorInitSuccess(pmpanasonic->status.axleNum,pmpanasonic->setting.absoCount);
 						}
 					}
 				}
@@ -1401,6 +1401,8 @@ uint8_t MAL_Motor_AcPanasonic_GetSettingFlag(uint32_t *pmpanasonic) {
 	return ptemp->setting.flag;
 }
 
+
+//1.5완료
 uint8_t MAL_Motor_AcPanasonic_GetAbsoStatus(uint32_t *pmpanasonic) {
 	MAL_MOTOR_PanasonicHandleTypeDef *ptemp = (MAL_MOTOR_PanasonicHandleTypeDef*) pmpanasonic;
 

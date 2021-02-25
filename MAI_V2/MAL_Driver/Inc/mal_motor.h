@@ -128,6 +128,8 @@ void MAL_Protocol_Ani_AlmSensorDetection(uint8_t axleId, uint8_t cwSen, uint8_t 
 void MAL_Protocol_Ani_RspAcAbsoBatteryOk(uint8_t axleId);
 void MAL_Protocol_Ani_RspDefPosi(uint8_t axleId, uint8_t initFlag);
 void MAL_Protocol_Ani_EventSensorDetect(MAL_SENSOR_LimitIDTypeDef *axleId, uint16_t value);
+
+void MAL_Protocol_Ani_RspSensorInitSuccess(uint8_t axleId,int32_t absoCnt);
 #endif
 
 #endif /* INC_MAL_MOTOR_H_ */

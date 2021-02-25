@@ -87,7 +87,7 @@ void MAL_Motor_SetAllLocation(uint16_t location)
 		mmotor[i].mal_motor_setLocationCallBack(mmotor[i].ctrHandle, location);
 	}
 }
-
+//void app_rx_init_sub_pid_move_sensor_ctl(prtc_header_t *pPh, uint8_t *pData);
 //=============================================================================================================
 /*void MAL_Motor_SetLocation(uint8_t axleId, uint16_t location)
 {
@@ -128,6 +128,7 @@ void app_rx_motion_sub_pid_adc_ctl(prtc_header_t *pPh, uint8_t *pData)
 
 	motorManager.senInitFlag[axleId] = SET;
 }*/
+
 void app_rx_init_sub_pid_driver_data1_ctl(prtc_header_t *pPh, uint8_t *pData)
 {
 	uint8_t axleId;
@@ -148,28 +149,79 @@ void app_rx_init_sub_pid_driver_data1_ctl(prtc_header_t *pPh, uint8_t *pData)
 	if (MOTOR_AXLE_CNT <= axleId) return;
 
 	MAL_Motor_AcPanasonic_SetSetting(mmotor[axleId].ctrHandle, SensorDirection, OppositeLimit, DefaultLocation, ReductionRatio);
+	app_tx_init_sub_pid_driver_data1_rsp(
+			0,
+			MAL_Board_ID_GetValue(),
+			MASTER_CAN_ID,
+			axleId,
+			SensorDirection,
+			OppositeLimit,
+			DefaultLocation,
+			ReductionRatio);
 }
 //=============================================================================================================
 
-uint8_t MAL_Motor_SetSetting_Absolute(uint8_t axleId, uint8_t SensorDirection, uint16_t OppositeLimit, uint16_t DefaultLocation, uint8_t ReductionRatio)
+//=============================================================================================================
+/*uint8_t MAL_Motor_SetSetting_Absolute(uint8_t axleId, uint8_t SensorDirection, uint16_t OppositeLimit, uint16_t DefaultLocation, uint8_t ReductionRatio)
 {
 	if (MOTOR_AXLE_CNT <= axleId) return 0;
 	return mmotor->mal_motor_setSetting_AbsoluteCallBack(mmotor[axleId].ctrHandle, SensorDirection, OppositeLimit, DefaultLocation, ReductionRatio);
 
+}*/
+
+void app_rx_init_sub_pid_absolute_battery_ctl(prtc_header_t *pPh, uint8_t *pData)
+{
+	uint8_t axleId;
+	uint32_t absoData;
+
+	axleId = pPh->sub_id;
+
+	if (MOTOR_AXLE_CNT <= axleId) return;
+
+	prtc_data_ctl_init_absolute_battery_t *temp = (prtc_data_ctl_init_absolute_battery_t *)pData;
+	absoData = temp->save_data;
+
+	MAL_Motor_AcPanasonic_SetLoadAbsoCnt(mmotor[axleId].ctrHandle, absoData);
+
+	app_tx_init_sub_pid_absolute_battery_rsp(0, MAL_Board_ID_GetValue(), MASTER_CAN_ID, axleId, absoData);
+
 }
 
-void MAL_Motor_SetDefaultLocation(uint8_t axleId)
+//=============================================================================================================
+/*void MAL_Motor_SetDefaultLocation(uint8_t axleId)
 {
 	if (MOTOR_AXLE_CNT <= axleId) return;
 	mmotor[axleId].mal_motor_setDefaultLocationCallBack(mmotor[axleId].ctrHandle);
+}*/
+void app_rx_init_sub_pid_move_init_position_ctl(prtc_header_t *pPh, uint8_t *pData)
+{
+	uint8_t axleId;
+	//uint32_t absoData;
+
+	axleId = pPh->sub_id;
+
+	if (MOTOR_AXLE_CNT <= axleId) return;
+
+	MAL_Motor_AcPanasonic_SetDefaultLocation(mmotor[axleId].ctrHandle);
+	app_tx_init_sub_pid_move_sensor_rsp(
+			0,
+			MAL_Board_ID_GetValue(),
+			MASTER_CAN_ID,
+			axleId);
+
+	app_tx_init_sub_pid_move_init_position_rqt(
+			0,
+			MAL_Board_ID_GetValue(),
+			MASTER_CAN_ID,
+			axleId);
 }
+//=============================================================================================================
 void MAL_Motor_SetJogCounter(uint8_t axleId, int16_t counter)
 {
 	if (MOTOR_AXLE_CNT <= axleId) return;
 	mmotor[axleId].mal_motor_setJogCounter(mmotor[axleId].ctrHandle, counter);
 }
 
-//if(mmotor[axleId].axleActive !=
 
 void MAL_Motor_SetAxleEnable(uint8_t axleId, uint8_t flag)
 {
@@ -205,12 +257,18 @@ uint8_t MAL_Motor_GetSensorInitRecvFlag(uint8_t axleId)
 }
 
 //20201103
+//=============================================================================================================
+/*
 uint8_t MAL_Motor_GetAbsoStatus(uint8_t axleId)
 {
 	if (MOTOR_AXLE_CNT <= axleId) return 0;
 	uint8_t ret = mmotor[axleId].mal_motor_getAbsoStatusCallBack(mmotor[axleId].ctrHandle);
 	return ret;
 }
+*/
+
+
+//=============================================================================================================
 
 uint8_t MAL_Motor_GetAbsoStatusOk(uint8_t axleId)
 {
@@ -226,6 +284,7 @@ uint32_t MAL_Motor_GetAbsoCountOk(uint8_t axleId)
 	return ret;
 }
 
+
 // event
 void MAL_Protocol_Ani_EventBootAlm(void)
 {
@@ -236,10 +295,22 @@ void MAL_Protocol_Ani_AlmSensorDetection(uint8_t axleId, uint8_t cwSen, uint8_t 
 {
 
 }
-
+//==========================================================================================================
+void MAL_Protocol_Ani_RspSensorInitSuccess(uint8_t axleId,int32_t absoCnt)
+{
+	app_tx_init_sub_pid_absolute_battery_ctl(
+			0,
+			MAL_Board_ID_GetValue(),
+			MASTER_CAN_ID,
+			axleId,
+			absoCnt
+			);
+}
+//==========================================================================================================
+//1.5
 void MAL_Protocol_Ani_RspAcAbsoBatteryOk(uint8_t axleId)
 {
-
+	app_tx_init_sub_pid_status_rsp(0, MAL_Board_ID_GetValue(), MASTER_CAN_ID, axleId, ABSOLUTE_BATTERY, MAL_Motor_AcPanasonic_GetAbsoStatusOk(mmotor[axleId].ctrHandle));
 }
 
 void MAL_Protocol_Ani_RspDefPosi(uint8_t axleId, uint8_t initFlag)
@@ -250,6 +321,57 @@ void MAL_Protocol_Ani_RspDefPosi(uint8_t axleId, uint8_t initFlag)
 void MAL_Protocol_Ani_EventSensorDetect(MAL_SENSOR_LimitIDTypeDef *axleId, uint16_t value)
 {
 
+}
+
+//==========================================================================================================
+//
+void app_rx_init_sub_pid_status_rqt(prtc_header_t *pPh, uint8_t *pData)
+{
+	uint8_t axleId;
+	axleId = pPh->sub_id;
+	if (MOTOR_AXLE_CNT <= axleId) return;
+
+	prtc_data_rqt_init_status_t *temp = (prtc_data_rqt_init_status_t *) pData;
+
+	switch(temp->step)
+	{
+	//init step 1 : 1. vattery check
+	case ABSOLUTE_BATTERY:
+		app_tx_init_sub_pid_status_rsp(
+				0,
+				MAL_Board_ID_GetValue(),
+				MASTER_CAN_ID,
+				axleId,
+				ABSOLUTE_BATTERY,
+				MAL_Motor_AcPanasonic_GetAbsoStatus(mmotor[axleId].ctrHandle));
+		break;
+	case DRIVER_DATA1:
+
+		break;
+	case DRIVER_DATA2:
+
+		break;
+	case MOVE_SENSOR:
+		app_tx_init_sub_pid_status_rsp(
+						0,
+						MAL_Board_ID_GetValue(),
+						MASTER_CAN_ID,
+						axleId,
+						MOVE_SENSOR,
+						MAL_Motor_AcPanasonic_GetAbsoStatus(mmotor[axleId].ctrHandle));
+
+		break;
+	case MOVE_INIT_POSITION:
+		app_tx_init_sub_pid_status_rsp(
+							0,
+							MAL_Board_ID_GetValue(),
+							MASTER_CAN_ID,
+							axleId,
+							MOVE_INIT_POSITION,
+							MAL_Motor_AcPanasonic_GetAbsoStatus(mmotor[axleId].ctrHandle));
+
+		break;
+	}
 }
 #endif
 
