@@ -461,6 +461,15 @@ void MAL_Motor_AcPanasonic_SetSettingVal(MAL_MOTOR_PanasonicHandleTypeDef *pmpan
 		pmpanasonic->setting.DefaultLocationCnt = -pmpanasonic->setting.DefaultLocationCnt;
 	}
 
+	//pmpanasonic->setting.flag = MAL_SEN_INIT_ING;
+
+	mpanasonic.setting.ampZeroCnt = 0;
+	pmpanasonic->setting.AbsoOffsetCnt = 0;
+	pmpanasonic->setting.AbsoOffsetFlag = RESET;
+	mAc232_Fnc.C2M1.readFlag = RESET;
+}
+void MAL_Motor_AcPanasonic_StartSenPosi(MAL_MOTOR_PanasonicHandleTypeDef *pmpanasonic)
+{
 	pmpanasonic->setting.flag = MAL_SEN_INIT_ING;
 
 	mpanasonic.setting.ampZeroCnt = 0;
@@ -468,7 +477,6 @@ void MAL_Motor_AcPanasonic_SetSettingVal(MAL_MOTOR_PanasonicHandleTypeDef *pmpan
 	pmpanasonic->setting.AbsoOffsetFlag = RESET;
 	mAc232_Fnc.C2M1.readFlag = RESET;
 }
-
 //20201104
 
 int32_t MAL_Motor_AcPanasonic_CalcAbsoToCount(MAL_MOTOR_PanasonicHandleTypeDef *pmpanasonic) {
@@ -1197,6 +1205,21 @@ void MAL_Motor_AcPanasonic_DefulatLocationProcess(MAL_MOTOR_PanasonicHandleTypeD
 			}
 			//값이 같으면 끝남
 
+/*			if (pmpanasonic->setting.SensorDirection == MAL_RO_CW) {
+
+				pmpanasonic->settingConv.cwLim = 0;
+				pmpanasonic->settingConv.ccwLim = -MAL_Motor_AcPanasonic_CalcDegreeToCount(pmpanasonic);
+				pmpanasonic->settingConv.range = pmpanasonic->settingConv.ccwLim;
+				pmpanasonic->setting.flag = MAL_SEN_INIT_OK;
+			} else if (pmpanasonic->setting.SensorDirection == MAL_RO_CCW) {
+
+				pmpanasonic->settingConv.ccwLim = 0;
+				pmpanasonic->settingConv.cwLim = MAL_Motor_AcPanasonic_CalcDegreeToCount(pmpanasonic);
+				pmpanasonic->settingConv.range = pmpanasonic->settingConv.cwLim;
+				pmpanasonic->setting.flag = MAL_SEN_INIT_OK;
+			}*/
+
+
 		}
 	}
 	else
@@ -1370,6 +1393,10 @@ void MAL_Motor_AcPanasonic_SetSetting(uint32_t *pmpanasonic, uint8_t SensorDirec
 	MAL_Motor_AcPanasonic_SetSettingVal((MAL_MOTOR_PanasonicHandleTypeDef*) pmpanasonic, SensorDirection, OppositeLimit, DefaultLocation, ReductionRatio);
 
 }
+void MAL_Motor_AcPanasonic_StartInit(uint32_t *pmpanasonic)
+{
+	MAL_Motor_AcPanasonic_StartSenPosi((MAL_MOTOR_PanasonicHandleTypeDef*) pmpanasonic);
+}
 //20201104
 uint8_t MAL_Motor_AcPanasonic_SetSetting_Absolute(uint32_t *pmpanasonic, uint8_t SensorDirection, uint16_t OppositeLimit, uint16_t DefaultLocation, uint8_t ReductionRatio) {
 	return MAL_Motor_AcPanasonic_SetSettingVal_AbsoluteVal((MAL_MOTOR_PanasonicHandleTypeDef*) pmpanasonic, SensorDirection, OppositeLimit, DefaultLocation, ReductionRatio);
@@ -1407,9 +1434,11 @@ uint8_t MAL_Motor_AcPanasonic_GetAbsoStatus(uint32_t *pmpanasonic) {
 	MAL_MOTOR_PanasonicHandleTypeDef *ptemp = (MAL_MOTOR_PanasonicHandleTypeDef*) pmpanasonic;
 
 //앱소 상태 읽기와 232로 읽기 시도한다
-	ptemp->setting.absoStatus = 0;
-	ptemp->setting.absoReadFlag = SET;
-
+	if(ptemp->setting.absoReadFlag == RESET)
+	{
+		ptemp->setting.absoStatus = 0;
+		ptemp->setting.absoReadFlag = SET;
+	}
 	return ptemp->setting.absoStatus;
 }
 

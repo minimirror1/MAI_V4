@@ -198,7 +198,7 @@ extern void MAL_Motor_AcPanasonic_CheckCount(MAL_MOTOR_PanasonicHandleTypeDef *p
 //protocol
 //set
 extern void MAL_Motor_AcPanasonic_SetLocation(uint32_t *pmpanasonic, uint16_t location);
-
+extern void MAL_Motor_AcPanasonic_StartInit(uint32_t *pmpanasonic);
 extern void MAL_Motor_AcPanasonic_SetSetting(
 		uint32_t *pmpanasonic,
 		uint8_t SensorDirection,
