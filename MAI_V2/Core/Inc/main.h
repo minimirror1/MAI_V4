@@ -42,6 +42,10 @@ extern "C" {
 #define CAN_Q_BUFF_SIZE 	512   //  ((헤더 4 Byte + 데이터 8 Byte) x 512(CAN_Q_BUFF_SIZE)) x 2(rx,tx) = 12,288 Byte
 /*************자신에 RAM버퍼에 따라 수정******************/
 
+// CAN 1개일 경우
+#define CAN_1	0 // 네이밍 알아서 define
+#define CAN_CNT 1
+
 
 #include "dl_can.h"
 #include "net_phd_pid.h"

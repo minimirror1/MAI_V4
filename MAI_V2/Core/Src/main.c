@@ -169,6 +169,9 @@ int main(void) {
 	gm_motion_RX_LED_init(LED_2_GPIO_Port, LED_2_Pin, GPIO_PIN_RESET);
 	gm_motion_TX_LED_init(LED_3_GPIO_Port, LED_3_Pin, GPIO_PIN_RESET);
 	MAL_MAI_V1_Init();
+
+	can_init_data_save(&hcan1);
+	MAL_CAN_FilterConfig(&hcan1);
 	my_can_id = MAL_Board_ID_GetValue();
 
 
@@ -315,7 +318,7 @@ int main(void) {
 
 		MAL_LOOP_ProcessHandler();
 		proc_can_rx();
-		proc_can_tx(&hcan1);
+		proc_can_tx();
 
 
 		/*	  HAL_Delay(100);

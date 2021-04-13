@@ -193,5 +193,5 @@ void MAL_CAN_Init(void)
 	//MAL_CAN_LEDInit(&mcan1.txLed, LED_2_GPIO_Port, LED_2_Pin, GPIO_PIN_RESET);
 	//MAL_CAN_LEDInit(&mcan1.rxLed, LED_3_GPIO_Port, LED_3_Pin, GPIO_PIN_RESET);
 
-	MAL_LOOP_ProcessAddr(MAL_CAN_Process);
+	//MAL_LOOP_ProcessAddr(MAL_CAN_Process);
 }

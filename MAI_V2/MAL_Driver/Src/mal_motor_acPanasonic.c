@@ -1165,6 +1165,8 @@ void MAL_Motor_AcPanasonic_DefulatLocationProcess(MAL_MOTOR_PanasonicHandleTypeD
 
 		if(CurveFlag == SET)
 		{
+
+
 			MAL_Motor_AcPanasonic_Curve_Clear();
 			MAL_Motor_AcPanasonic_Curve_Init(
 					(float)pmpanasonic->setting.DefultLocTempCnt,
@@ -1196,12 +1198,16 @@ void MAL_Motor_AcPanasonic_DefulatLocationProcess(MAL_MOTOR_PanasonicHandleTypeD
 					waitCntFlag = HAL_BUSY;
 					pmpanasonic->setting.flag = MAL_SEN_INIT_OK;
 					MAL_Protocol_Ani_RspDefPosi(pmpanasonic->status.axleNum, MAL_SEN_INIT_OK);
+
+					CurveFlag = SET;//210413
 				}
 			} else {
 				pmpanasonic->setting.AbsoOffsetFlag = RESET;
 				waitCntFlag = HAL_BUSY;
 				pmpanasonic->setting.flag = MAL_SEN_INIT_OK;
 				MAL_Protocol_Ani_RspDefPosi(pmpanasonic->status.axleNum, MAL_SEN_INIT_OK);
+
+				CurveFlag = SET;//210413
 			}
 			//값이 같으면 끝남
 
@@ -1224,7 +1230,7 @@ void MAL_Motor_AcPanasonic_DefulatLocationProcess(MAL_MOTOR_PanasonicHandleTypeD
 	}
 	else
 	{
-		CurveFlag = SET;
+		//CurveFlag = SET;
 	}
 
 #if 0
@@ -1403,6 +1409,11 @@ uint8_t MAL_Motor_AcPanasonic_SetSetting_Absolute(uint32_t *pmpanasonic, uint8_t
 }
 void MAL_Motor_AcPanasonic_SetDefaultLocation(uint32_t *pmpanasonic) {
 	MAL_MOTOR_PanasonicHandleTypeDef *ppmpanasonic = (MAL_MOTOR_PanasonicHandleTypeDef*) pmpanasonic;
+
+	if(ppmpanasonic->setting.flag ==  MAL_SEN_INIT_OK)
+	{
+		ppmpanasonic->setting.DefultLocTempCnt = ppmpanasonic->status.position.now;
+	}
 	ppmpanasonic->setting.flag = MAL_SEN_DEF_LOCATION;
 }
 
