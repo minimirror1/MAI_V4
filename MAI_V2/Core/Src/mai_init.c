@@ -99,9 +99,9 @@ void MAL_MAI_V1_Init(void)
 {
 	MAL_Motor_Init();
 
-    mboard.myCanId = MAL_Board_ID_GetValue();
 
-    my_can_id = MAL_Board_ID_GetValue();
+
+
 
 	MAL_Board_VerReg();
     MAL_CAN_Init();
@@ -111,11 +111,16 @@ void MAL_MAI_V1_Init(void)
 
 	MAL_RS232_Init();
 
+
+	mboard.myCanId = MAL_Board_ID_GetValue();
+    my_can_id = MAL_Board_ID_GetValue();
 	//MAL_LOOP_ProcessAddr(test_init);
 
 	MAL_LOOP_ProcessAddr(MAL_LED_process);
 
-	MAL_Protocol_Ani_EventBootAlm();
+
+
+
 }
 
 void MAL_Board_VerReg(void)

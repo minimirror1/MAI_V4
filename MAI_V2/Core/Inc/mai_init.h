@@ -27,7 +27,7 @@
 //0.1.0 초기위치 이동 Curve 5초
 
 //배포시 와치독 활성화 필수!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//#define IWDG_INIT
+#define IWDG_INIT
 
 #define MAL_TEST_MODE
 

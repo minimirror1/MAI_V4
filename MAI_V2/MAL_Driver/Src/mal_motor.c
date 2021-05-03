@@ -372,7 +372,14 @@ void MAL_Protocol_Ani_RspAcAbsoBatteryOk(uint8_t axleId)
 
 void MAL_Protocol_Ani_RspDefPosi(uint8_t axleId, uint8_t initFlag)
 {
-
+	app_tx_init_sub_pid_status_ctl(
+			0,
+			0,
+			MAL_Board_ID_GetValue(),
+			MASTER_CAN_ID,
+			31,
+			MOVE_INIT_POSITION,
+			initFlag);
 }
 
 void MAL_Protocol_Ani_EventSensorDetect(MAL_SENSOR_LimitIDTypeDef *axleId, uint16_t value)
