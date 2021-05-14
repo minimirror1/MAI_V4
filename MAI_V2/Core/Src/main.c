@@ -38,6 +38,7 @@
 #include "eeprom_data.h"
 #include "mal_motor_acPanaCurve.h"
 
+#include "Imonitor.h"
 
 
 
@@ -174,6 +175,8 @@ int main(void) {
 	my_can_id = MAL_Board_ID_GetValue();
 	can_init_data_save(&hcan1);
 	MAL_Protocol_Ani_EventBootAlm();
+
+	Imonitor_init();
 
 	/* USER CODE END 2 */
 

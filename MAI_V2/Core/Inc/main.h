@@ -47,6 +47,14 @@ extern "C" {
 #define CAN_CNT 1
 
 
+#define IMONITOR_SLAVE
+//#define IMONITOR_MASTER
+
+#ifdef IMONITOR_SLAVE
+#define IMONITOR_SLAVE_MAI
+//#define IMONITOR_SLAVE_MBI
+#endif
+
 #include "dl_can.h"
 #include "net_phd_pid.h"
 
@@ -59,6 +67,7 @@ extern "C" {
 #include "app_pid_motion_cmd.h"
 #include "app_pid_sensor_cmd.h"
 #include "app_pid_speaker_cmd.h"
+#include "app_pid_inspection_cmd.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

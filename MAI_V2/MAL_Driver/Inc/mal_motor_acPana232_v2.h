@@ -98,6 +98,7 @@ typedef struct __MAL_MOTOR_ACPANA232_PacketHandleTypeDefv2
 	uint32_t t_runFlag;
 
 	uint32_t timeOutCnt;
+	uint8_t f_error;
 
 
 

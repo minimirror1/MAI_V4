@@ -156,6 +156,11 @@ void MAL_Motor_AcPanasonic_232_TxData(MAL_MOTOR_ACPANA232_PacketHandleTypeDef *a
 void MAL_MAL_Motor_AcPanasonic_232TimeOut(MAL_MOTOR_ACPANA232_PacketHandleTypeDef *ac232Packet)
 {
 	ac232Packet->timeOutCnt++;
+
+	if(ac232Packet->timeOutCnt >= 3)
+	{
+		ac232Packet->f_error = SET;
+	}
 }
 //(tx)호스트->노드 : 통신 요청
 HAL_StatusTypeDef MAL_Motor_AcPanasonic_232Packet_H_ENQ(MAL_MOTOR_ACPANA232_PacketHandleTypeDef *ac232Packet) {
@@ -389,6 +394,11 @@ HAL_StatusTypeDef MAL_Motor_AcPanasonic_232GetDataProcess(MAL_MOTOR_ACPANA232_Pa
 			break;
 		case MAL_MOTOR_ACPANA232_PARSER_H_ACK: //호스트 : 응답
 			ret = MAL_Motor_AcPanasonic_232Packet_H_ACK(ac232Packet);
+			ac232Packet->f_error = RESET;
+			if(ac232Packet->timeOutCnt != 0)
+			{
+				ac232Packet->timeOutCnt--;
+			}
 			break;
 		}
 	}

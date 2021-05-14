@@ -39,6 +39,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MAI_V2/gm_motion_CANprotocol/common/GM_NET/PHA/Inc}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MAI_V2/gm_motion_CANprotocol/common/GM_NET/PHD/Inc}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MAI_V2/gm_motion_CANprotocol/common/GM_PRTC/Inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MAI_V2/Imonitor/Inc}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.input.1583631875" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.input"/>
 							</tool>
@@ -63,6 +64,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MAI_V2/gm_motion_CANprotocol/common/GM_NET/PHD/Inc}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MAI_V2/gm_motion_CANprotocol/common/GM_PRTC/Inc}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MAI_V2/MAL_Driver/Inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MAI_V2/Imonitor/Inc}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.1435305358" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c"/>
 							</tool>
@@ -93,6 +95,7 @@
 					<sourceEntries>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Core"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Drivers"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Imonitor"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="MAL_Driver"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="gm_motion_CANprotocol"/>
 					</sourceEntries>
@@ -174,6 +177,7 @@
 					<sourceEntries>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Core"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Drivers"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Imonitor"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="MAL_Driver"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="gm_motion_CANprotocol"/>
 					</sourceEntries>
