@@ -182,6 +182,7 @@ HAL_StatusTypeDef MAL_Motor_AcPanasonic_232Packet_N_EOT(MAL_MOTOR_ACPANA232_Pack
 		} else {
 			ac232Packet->sequnce = MAL_MOTOR_ACPANA232_PARSER_H_ENQ; //0
 			ac232Packet->errorFlag = SET;
+			ac232Packet->f_error = SET;
 			ret = HAL_ERROR;
 		}
 		break;
