@@ -11,8 +11,8 @@
 #include "main.h"
 
 #define MAL_VERSION_MAJER 0
-#define MAL_VERSION_MINOR 1
-#define MAL_VERSION_BUILD 0
+#define MAL_VERSION_MINOR 0
+#define MAL_VERSION_BUILD 4
 
 //0.0.1 초기버전
 //0.0.2 와치독 활성화
@@ -25,6 +25,9 @@
 //0.0.10 엡소모드 추가
 
 //0.1.0 초기위치 이동 Curve 5초
+
+
+//0.0.4 1.5차버전   엡소값 읽기 폴링응답
 
 //배포시 와치독 활성화 필수!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #define IWDG_INIT

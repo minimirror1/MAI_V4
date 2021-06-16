@@ -337,7 +337,16 @@ uint32_t MAL_Motor_GetAbsoCountOk(uint8_t axleId)
 	uint32_t ret = mmotor[0].mal_motor_getAbsoCountOkCallBack(mmotor[0].ctrHandle);
 	return ret;
 }
-
+void app_rx_init_sub_pid_absolute_battery_rqt(uint8_t num, prtc_header_t *pPh, uint8_t *pData)
+{
+	app_tx_init_sub_pid_absolute_battery_rsp(
+			0,
+			0,
+			MAL_Board_ID_GetValue(),
+			MASTER_CAN_ID,
+			1,
+			MAL_Motor_GetAbsoCountOk(0));
+}
 
 // event
 void MAL_Protocol_Ani_EventBootAlm(void)
