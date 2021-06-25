@@ -22,6 +22,8 @@
 
 #define PANASONIC_DMA_MEM_SIZE		10005
 
+#define PANASONIC_POSI_MAX	(uint16_t)0xFFFF
+
 
 
 

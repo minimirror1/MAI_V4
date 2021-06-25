@@ -215,7 +215,7 @@ static int32_t MAL_Motor_AcPanasonic_CalcTargetCount(MAL_MOTOR_PanasonicHandleTy
 	float ratio;
 	float temp;
 
-	ratio = (float) target / 4095; //비율을 계산
+	ratio = (float) target / PANASONIC_POSI_MAX; //비율을 계산
 
 	temp = (float) pmpanasonic->settingConv.range * ratio;
 
@@ -308,7 +308,7 @@ static int32_t MAL_Motor_AcPanasonic_CalcRatioToCount(MAL_MOTOR_PanasonicHandleT
 	float ratio;
 	float temp;
 
-	ratio = (float) val / 4095; //비율을 계산
+	ratio = (float) val / PANASONIC_POSI_MAX; //비율을 계산
 
 	temp = (float) pmpanasonic->settingConv.range * ratio;
 
@@ -450,7 +450,7 @@ void MAL_Motor_AcPanasonic_SetSettingVal(MAL_MOTOR_PanasonicHandleTypeDef *pmpan
 	tempDefLocCnt *= (double) pmpanasonic->setting.ReductionRatio; 		//감속 후 바퀴수
 	tempDefLocCnt *= (double) 10000; 		//한바퀴 카운터  = 총 펄스 수
 	tempDefLocCnt *= DefaultLocation;
-	tempDefLocCnt = tempDefLocCnt / 4095;
+	tempDefLocCnt = tempDefLocCnt / PANASONIC_POSI_MAX;
 
 	pmpanasonic->setting.DefaultLocationCnt = (int32_t) -tempDefLocCnt;
 
@@ -621,7 +621,7 @@ uint8_t MAL_Motor_AcPanasonic_SetSettingVal_AbsoluteVal(MAL_MOTOR_PanasonicHandl
 	tempDefLocCnt *= (double) pmpanasonic->setting.ReductionRatio; 		//감속 후 바퀴수
 	tempDefLocCnt *= (double) 10000; 		//한바퀴 카운터  = 총 펄스 수
 	tempDefLocCnt *= DefaultLocation;
-	tempDefLocCnt = tempDefLocCnt / 4095;
+	tempDefLocCnt = tempDefLocCnt / PANASONIC_POSI_MAX;
 
 	pmpanasonic->setting.DefaultLocationCnt = (int32_t) -tempDefLocCnt;
 	pmpanasonic->setting.AbsoOffsetCnt = pmpanasonic->setting.DefaultLocationCnt;
@@ -649,7 +649,7 @@ uint8_t MAL_Motor_AcPanasonic_SetSettingVal_AbsoluteVal(MAL_MOTOR_PanasonicHandl
 		pmpanasonic->settingConv.range = pmpanasonic->settingConv.ccwLim;
 		pmpanasonic->setting.flag = MAL_SEN_INIT_OK;
 
-		double defLocCalc = (double) get_count * 4095;
+		double defLocCalc = (double) get_count * PANASONIC_POSI_MAX;
 		defLocCalc = defLocCalc / (double) pmpanasonic->settingConv.range;
 
 		pmpanasonic->setting.DefultLocTemp = (int32_t) floor((defLocCalc) + 0.5);
@@ -663,7 +663,7 @@ uint8_t MAL_Motor_AcPanasonic_SetSettingVal_AbsoluteVal(MAL_MOTOR_PanasonicHandl
 		pmpanasonic->settingConv.range = pmpanasonic->settingConv.cwLim;
 		pmpanasonic->setting.flag = MAL_SEN_INIT_OK;
 
-		double defLocCalc = (double) get_count * 4095;
+		double defLocCalc = (double) get_count * PANASONIC_POSI_MAX;
 		defLocCalc = defLocCalc / (double) pmpanasonic->settingConv.range;
 
 		pmpanasonic->setting.DefultLocTemp = (int32_t) floor((defLocCalc) + 0.5);
