@@ -301,6 +301,11 @@ int main(void) {
 				MAL_Motor_AcPanasonic_232_GetPulseCounter();
 				toggle232 = 1;
 			}
+			else if(toggle232 == 1)
+			{
+				MAL_Motor_AcPanasonic_232_GetAlmNumber();
+				toggle232 = 2;
+			}
 			else
 			{
 				MAL_Motor_AcPanasonic_232_GetAbsoluteCounter();

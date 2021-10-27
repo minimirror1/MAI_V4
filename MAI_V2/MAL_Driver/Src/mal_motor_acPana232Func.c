@@ -49,6 +49,9 @@ uint8_t MAL_Motor_AcPanasonic_232_GetDataLen(MAL_MOTOR_ACPANA232_DataBundleTypeD
 	case 9://=========================================================
 		switch(pData->mode)
 		{
+		case 0x00:
+			ret = sizeof(MAL_MOTOR_ACPANA232_PacketC9M0TypeDef);
+			break;
 		case 0x04:
 			ret = sizeof(MAL_MOTOR_ACPANA232_PacketC9M4TypeDef);
 			break;
@@ -199,12 +202,51 @@ void MAL_Motor_AcPanasonic_232_GetAbsoluteCounter(void)
 }
 
 
+
 //=================================================================================================
 //=================================================================================================
 
 //=================================================================================================
 //=============command 9
 //=================================================================================================
+//앱소클리어 cmd : 9, mode : 0-------------------------------------------------------------
+//210625 알람읽기
+void MAL_Motor_AcPanasonic_232_GetAlmNumber_CallBack(uint8_t *data)
+{
+	MAL_MOTOR_ACPANA232_PacketDataHeaderTypeDef *header = (MAL_MOTOR_ACPANA232_PacketDataHeaderTypeDef*) data;
+	MAL_MOTOR_ACPANA232_PacketC9M0TypeDef *pData = (MAL_MOTOR_ACPANA232_PacketC9M0TypeDef*) &header->payload[0];
+
+	if(header->cmd != 9)
+		return;
+
+	if(header->mode != 0x00)
+		return;
+
+	if(pData->errorCode != 0)
+		return;
+
+	mAc232_Fnc.C9M0.errorCode = pData->errorCode;
+
+	if(mAc232_Fnc.C9M0.errorCode == 0)
+	{
+		mAc232_Fnc.C9M0.ctrStatus = RESET;
+	}
+
+	mAc232_Fnc.C9M0.codeMain = pData->codeMain;
+	mAc232_Fnc.C9M0.codeSub = pData->codeSub;
+}
+void MAL_Motor_AcPanasonic_232_GetAlmNumber(void)
+{
+	MAL_MOTOR_ACPANA232_DataBundleTypeDef tData;
+
+	tData.cmd = 9;
+	tData.mode = 0x00;
+	tData.mal_getDataProcess_CallBack = MAL_Motor_AcPanasonic_232_GetAlmNumber_CallBack;
+
+	MAL_Motor_AcPanasonic_232_GetDataAddQueue(&tData);
+
+}
+
 //앱소클리어 cmd : 9, mode : 4-------------------------------------------------------------
 void MAL_Motor_AcPanasonic_232_SetAlmClear_CallBack(uint8_t *data)
 {

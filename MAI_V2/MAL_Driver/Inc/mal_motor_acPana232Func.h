@@ -90,6 +90,16 @@ typedef struct __MAL_MOTOR_ACPANA232_C2MdTypeDef {
 //=============command 9
 //=================================================================================================
 
+//알람클리어 cmd : 9, mode : 0-------------------------------------------------------------
+#pragma pack(1)
+typedef struct __MAL_MOTOR_ACPANA232_PacketAlmNumberTypeDef
+{
+	uint8_t codeMain;
+	uint8_t codeSub;
+	uint8_t errorCode;
+}MAL_MOTOR_ACPANA232_PacketC9M0TypeDef;
+#pragma pack()
+
 //알람클리어 cmd : 9, mode : 4-------------------------------------------------------------
 #pragma pack(1)
 typedef struct __MAL_MOTOR_ACPANA232_PacketAlmClearTypeDef
@@ -99,12 +109,25 @@ typedef struct __MAL_MOTOR_ACPANA232_PacketAlmClearTypeDef
 #pragma pack()
 
 //저장 구조체
+#pragma pack(1)//앱솔루트 엔코더 읽기 cmd:9 mode:0
+typedef struct __MAL_MOTOR_ACPANA232_C9M0TypeDef {
+
+	uint8_t codeMain;
+	uint8_t codeSub;
+	uint8_t errorCode;
+
+	uint8_t ctrStatus;// RESET : 성공,  SET : 요청(타임아웃시 실패의미)
+} MAL_MOTOR_ACPANA232_C9M0TypeDef;
+#pragma pack()
+
 #pragma pack(1)//앱솔루트 엔코더 읽기 cmd:9 mode:4
 typedef struct __MAL_MOTOR_ACPANA232_C9M4TypeDef {
 	uint8_t errorCode;
 
 	uint8_t ctrStatus;// RESET : 성공,  SET : 요청(타임아웃시 실패의미)
 } MAL_MOTOR_ACPANA232_C9M4TypeDef;
+
+
 #pragma pack()
 //---------------------------------------------------------------------------------------------
 
@@ -150,6 +173,7 @@ typedef struct __MAL_MOTOR_ACPANA232_FuncTypeDef
 	MAL_MOTOR_ACPANA232_C2MdTypeDef C2Md;//앱솔루트 엔코더 읽기
 
 	//command : 9
+	MAL_MOTOR_ACPANA232_C9M0TypeDef C9M0;//알람 읽기 210625
 	MAL_MOTOR_ACPANA232_C9M4TypeDef C9M4;//알람 클리어  20201109
 	MAL_MOTOR_ACPANA232_C9MbTypeDef C9Mb;//앱소클리어
 }MAL_MOTOR_ACPANA232_FuncTypeDef;
@@ -160,6 +184,7 @@ extern uint8_t MAL_Motor_AcPanasonic_232_GetDataLen(MAL_MOTOR_ACPANA232_DataBund
 
 extern void MAL_Motor_AcPanasonic_232_GetPulseCounter(void);
 extern void MAL_Motor_AcPanasonic_232_GetAbsoluteCounter(void);
+extern void MAL_Motor_AcPanasonic_232_GetAlmNumber(void);
 extern void MAL_Motor_AcPanasonic_232_SetAbsoluteClear(void);
 extern void MAL_Motor_AcPanasonic_232_SetAlmClear(void);
 

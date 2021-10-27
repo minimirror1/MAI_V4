@@ -1073,7 +1073,7 @@ void MAL_Motor_AcPanasonic_ProcessSensorInit(MAL_MOTOR_PanasonicHandleTypeDef *p
 
 			//MAL_Protocol_Ani_RspSensorInitSuccess(pmpanasonic->status.axleNum);
 		} else {
-			MAL_Motor_AcPanasonic_SetJog1degree(pmpanasonic, pmpanasonic->setting.jogCount, 1);
+			MAL_Motor_AcPanasonic_SetJog1degree(pmpanasonic, pmpanasonic->setting.jogCount, 10);
 		}
 	} else if (pmpanasonic->setting.SensorDirection == MAL_RO_CCW) {
 		if (MAL_SENSOR_GetDetection(pmpanasonic->ccwSen) == MAL_SENSOR_SET) {
@@ -1096,7 +1096,7 @@ void MAL_Motor_AcPanasonic_ProcessSensorInit(MAL_MOTOR_PanasonicHandleTypeDef *p
 
 			//MAL_Protocol_Ani_RspSensorInitSuccess(pmpanasonic->status.axleNum);
 		} else {
-			MAL_Motor_AcPanasonic_SetJog1degree(pmpanasonic, pmpanasonic->setting.jogCount, 1);
+			MAL_Motor_AcPanasonic_SetJog1degree(pmpanasonic, pmpanasonic->setting.jogCount, 10);
 		}
 	}
 

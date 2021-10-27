@@ -12,10 +12,16 @@
 #include "mal_motor_acPana232_v2.h"
 #include "mal_motor_acPana232Func.h"
 
+#include "mal_board_info.h"
+#include "mal_motor.h"
+#include "app_pid_init_cmd.h"
+
 #ifdef HAL_MOTOR_AC_MODULE_ENABLED
 #define RS232TIME_OUT 300
 
 MAL_MOTOR_ACPANA232_PacketHandleTypeDef mAc232;
+extern MAL_MOTOR_ACPANA232_FuncTypeDef mAc232_Fnc;
+
 
 HAL_StatusTypeDef MAL_Motor_AcPanasonic_232GetDataProcess(MAL_MOTOR_ACPANA232_PacketHandleTypeDef *ac232Packet, MAL_MOTOR_ACPANA232_DataBundleTypeDef *packet);
 
@@ -56,8 +62,32 @@ void MAL_Motor_AcPanasonic_232_CheckQueue() {
 	}
 }
 
+//210625
+void app_rx_error_sub_pid_clear_ctl(uint8_t num, prtc_header_t *pPh, prtc_data_ctl_error_clear_t *pData)
+{
+	MAL_Motor_AcPanasonic_232_SetAbsoluteClear();
+	MAL_Motor_AcPanasonic_232_SetAlmClear();
+}
+//210625
+void MAL_Motor_AcPanasonic_232_Alm()
+{
+	static uint32_t t_Alm = 0;
+	if(mAc232_Fnc.C9M0.codeMain != 0x00)
+	{
+		if(MAL_SysTimer_Elapsed(t_Alm) >= 1000)
+		{
+			uint32_t errorCode = 0;
+			errorCode = mAc232_Fnc.C9M0.codeMain<<16;
+			errorCode |= mAc232_Fnc.C9M0.codeSub;
+
+			app_tx_error_sub_pid_ac_ctl(0,PRIORITY_HIGH, MAL_Board_ID_GetValue(), MASTER_CAN_ID, MOTOR_AXLE_CNT, errorCode);
+			t_Alm = MAL_SysTimer_GetTickCount();
+		}
+	}
+}
 void MAL_Motor_AcPanasonic_232_Process(void) {
 	MAL_Motor_AcPanasonic_232_CheckQueue();
+	MAL_Motor_AcPanasonic_232_Alm();
 }
 
 void MAL_Motor_AcPanasonic_232_RegInit(MAL_UART_HandleTypeDef *muart) {

@@ -113,7 +113,7 @@ void app_rx_init_sub_pid_move_sensor_ctl(uint8_t num, prtc_header_t *pPh, uint8_
 	//xxx 변경해야함
 	mmotor[axleId].mal_motor_setLocationCallBack(mmotor[axleId].ctrHandle, location);
 }*/
-void app_rx_motion_sub_pid_adc_ctl(uint8_t num, prtc_header_t *pPh, uint8_t *pData)
+void app_rx_motion_sub_pid_adc_ctl(uint8_t num, prtc_header_t *pPh, prtc_data_ctl_motion_adc_t *pData)
 {
 
 	uint8_t axleId = 0;
@@ -148,7 +148,7 @@ void app_rx_motion_sub_pid_adc_ctl(uint8_t num, prtc_header_t *pPh, uint8_t *pDa
 	motorManager.senInitFlag[axleId] = SET;
 }*/
 
-void app_rx_init_sub_pid_driver_data1_ctl(uint8_t num, prtc_header_t *pPh, uint8_t *pData)
+void app_rx_init_sub_pid_driver_data1_ctl(uint8_t num, prtc_header_t *pPh, prtc_data_ctl_init_driver_data1_t *pData)
 {
 	uint8_t axleId = 0;
 	axleId = (uint8_t)pPh->sub_id;
@@ -190,7 +190,7 @@ void app_rx_init_sub_pid_driver_data1_ctl(uint8_t num, prtc_header_t *pPh, uint8
 
 }*/
 
-void app_rx_init_sub_pid_absolute_battery_ctl(uint8_t num, prtc_header_t *pPh, uint8_t *pData)
+void app_rx_init_sub_pid_absolute_battery_ctl(uint8_t num, prtc_header_t *pPh, prtc_data_ctl_init_absolute_battery_t *pData)
 {
 	uint32_t absoData;
 
@@ -246,7 +246,7 @@ void app_rx_init_sub_pid_move_init_position_rqt(uint8_t num, prtc_header_t *pPh,
 			MASTER_CAN_ID,
 			axleId);
 }
-void app_rx_motion_sub_pid_direction_ctl(uint8_t num, prtc_header_t *pPh, uint8_t *pData)
+void app_rx_motion_sub_pid_direction_ctl(uint8_t num, prtc_header_t *pPh, prtc_data_ctl_motion_direction_t *pData)
 {
 	/*void MAL_Motor_SetJogCounter(uint8_t axleId, int16_t counter)
 	{
@@ -399,7 +399,7 @@ void MAL_Protocol_Ani_EventSensorDetect(MAL_SENSOR_LimitIDTypeDef *axleId, uint1
 //==========================================================================================================
 
 //
-void app_rx_init_sub_pid_status_rqt(uint8_t num, prtc_header_t *pPh, uint8_t *pData)
+void app_rx_init_sub_pid_status_rqt(uint8_t num, prtc_header_t *pPh, prtc_data_rqt_init_status_t *pData)
 {
 	uint8_t axleId = 0;
 	uint8_t status = 0;
