@@ -12,8 +12,12 @@
 
 #define MAL_VERSION_MAJER 0
 #define MAL_VERSION_MINOR 0
-#define MAL_VERSION_BUILD 4
+#define MAL_VERSION_BUILD 1
 
+//v5
+//0.0.1 하드웨어 테스트
+
+//v4
 //0.0.1 초기버전
 //0.0.2 와치독 활성화
 //0.0.3 센서 초기화 후 센서 감지시 상태 알람

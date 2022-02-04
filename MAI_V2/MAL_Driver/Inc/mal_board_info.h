@@ -10,7 +10,7 @@
 
 #include "main.h"
 
-#define MAL_BOARD_ID_DIGIT 4
+#define MAL_BOARD_ID_DIGIT 5
 
 //id=================================================================
 typedef struct __MAL_BOARD_IdPortTypeDef

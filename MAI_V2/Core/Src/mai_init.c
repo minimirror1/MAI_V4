@@ -128,10 +128,11 @@ void MAL_Board_VerReg(void)
 
 	MAL_Board_Version_init(MAL_VERSION_MAJER, MAL_VERSION_MINOR, MAL_VERSION_BUILD);
 
-	MAL_Board_ID_InitPort(ID_1_GPIO_Port, ID_1_Pin, GPIO_PIN_RESET);
-	MAL_Board_ID_InitPort(ID_2_GPIO_Port, ID_2_Pin, GPIO_PIN_RESET);
-	MAL_Board_ID_InitPort(ID_4_GPIO_Port, ID_4_Pin, GPIO_PIN_RESET);
-	MAL_Board_ID_InitPort(ID_8_GPIO_Port, ID_8_Pin, GPIO_PIN_RESET);
+	MAL_Board_ID_InitPort(ID_1_GPIO_Port, ID_1_Pin, GPIO_PIN_SET);
+	MAL_Board_ID_InitPort(ID_2_GPIO_Port, ID_2_Pin, GPIO_PIN_SET);
+	MAL_Board_ID_InitPort(ID_4_GPIO_Port, ID_4_Pin, GPIO_PIN_SET);
+	MAL_Board_ID_InitPort(ID_8_GPIO_Port, ID_8_Pin, GPIO_PIN_SET);
+	MAL_Board_ID_InitPort(ID_16_GPIO_Port, ID_16_Pin, GPIO_PIN_SET);
 
 	MAL_Board_ID_SetReadValue();
 
