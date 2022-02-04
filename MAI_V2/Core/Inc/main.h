@@ -38,12 +38,12 @@ extern "C" {
 
 
 
-/*************ÏûêÏã†Ïóê RAMÎ≤ÑÌçºÏóê Îî∞Îùº ÏàòÏ†ï******************/
-#define CAN_Q_BUFF_SIZE 	512   //  ((Ìó§Îçî 4 Byte + Îç∞Ïù¥ÌÑ∞ 8 Byte) x 512(CAN_Q_BUFF_SIZE)) x 2(rx,tx) = 12,288 Byte
-/*************ÏûêÏã†Ïóê RAMÎ≤ÑÌçºÏóê Îî∞Îùº ÏàòÏ†ï******************/
+/*************?ûê?ã†?óê RAMÎ≤ÑÌçº?óê ?î∞?ùº ?àò?†ï******************/
+#define CAN_Q_BUFF_SIZE 	512   //  ((?ó§?çî 4 Byte + ?ç∞?ù¥?Ñ∞ 8 Byte) x 512(CAN_Q_BUFF_SIZE)) x 2(rx,tx) = 12,288 Byte
+/*************?ûê?ã†?óê RAMÎ≤ÑÌçº?óê ?î∞?ùº ?àò?†ï******************/
 
 // CAN 1Í∞úÏùº Í≤ΩÏö∞
-#define CAN_1	0 // ÎÑ§Ïù¥Î∞ç ÏïåÏïÑÏÑú define
+#define CAN_1	0 // ?Ñ§?ù¥Î∞? ?ïå?ïÑ?Ñú define
 #define CAN_CNT 1
 
 
@@ -103,20 +103,28 @@ void Error_Handler(void);
 #define SEN_2_GPIO_Port GPIOC
 #define SEN_1_Pin GPIO_PIN_5
 #define SEN_1_GPIO_Port GPIOC
-#define ID_8_Pin GPIO_PIN_6
-#define ID_8_GPIO_Port GPIOC
-#define ID_4_Pin GPIO_PIN_7
-#define ID_4_GPIO_Port GPIOC
-#define ID_2_Pin GPIO_PIN_8
-#define ID_2_GPIO_Port GPIOC
-#define ID_1_Pin GPIO_PIN_9
-#define ID_1_GPIO_Port GPIOC
+#define SEN_1_DEC_Pin GPIO_PIN_0
+#define SEN_1_DEC_GPIO_Port GPIOB
+#define SEN_2_DEC_Pin GPIO_PIN_1
+#define SEN_2_DEC_GPIO_Port GPIOB
+#define LED_3_Pin GPIO_PIN_13
+#define LED_3_GPIO_Port GPIOB
+#define LED_2_Pin GPIO_PIN_14
+#define LED_2_GPIO_Port GPIOB
 #define LED_1_Pin GPIO_PIN_15
-#define LED_1_GPIO_Port GPIOA
-#define LED_2_Pin GPIO_PIN_10
-#define LED_2_GPIO_Port GPIOC
-#define LED_3_Pin GPIO_PIN_11
-#define LED_3_GPIO_Port GPIOC
+#define LED_1_GPIO_Port GPIOB
+#define ID_16_Pin GPIO_PIN_6
+#define ID_16_GPIO_Port GPIOC
+#define ID_8_Pin GPIO_PIN_7
+#define ID_8_GPIO_Port GPIOC
+#define ID_4_Pin GPIO_PIN_8
+#define ID_4_GPIO_Port GPIOC
+#define ID_2_Pin GPIO_PIN_9
+#define ID_2_GPIO_Port GPIOC
+#define ID_1_Pin GPIO_PIN_8
+#define ID_1_GPIO_Port GPIOA
+#define UART1_RS485_EN_Pin GPIO_PIN_15
+#define UART1_RS485_EN_GPIO_Port GPIOA
 #define PWM_CCW_Pin GPIO_PIN_4
 #define PWM_CCW_GPIO_Port GPIOB
 #define PWM_CW_Pin GPIO_PIN_6
