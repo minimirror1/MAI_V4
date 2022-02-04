@@ -66,6 +66,7 @@ TIM_HandleTypeDef htim4;
 DMA_HandleTypeDef hdma_tim3_ch1_trig;
 DMA_HandleTypeDef hdma_tim4_ch1;
 
+UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
 
 IWDG_HandleTypeDef hiwdg;
@@ -150,8 +151,18 @@ int main(void)
 	//__HAL_RCC_DBGMCU_CLK_ENABLE();
 	//__HAL_DBGMCU_FREEZE_IWDG();
 #endif
+  /* USER CODE END SysInit */
 
-	/* USER CODE BEGIN 2 */
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+  MX_DMA_Init();
+  MX_CAN1_Init();
+  MX_TIM3_Init();
+  MX_TIM4_Init();
+  MX_USART2_UART_Init();
+  MX_TIM2_Init();
+  MX_USART1_UART_Init();
+  /* USER CODE BEGIN 2 */
   /* USER CODE BEGIN SysInit */
 
   /* USER CODE END SysInit */
