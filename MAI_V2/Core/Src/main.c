@@ -184,7 +184,7 @@ int main(void)
 
 	Imonitor_init();
 
-	/* USER CODE END 2 */
+
 
 /*eep example*/
 ////
@@ -294,11 +294,13 @@ int main(void)
 	HAL_UART_Transmit(&huart2, "\n\r", 2, 100);
 */
 
+	/* USER CODE END 2 */
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
 	while (1) {
 		/* USER CODE END WHILE */
 
+		/* USER CODE BEGIN 3 */
 
 		if(MAL_SysTimer_Elapsed(t_PulseSync) >= 500)
 		{
@@ -327,7 +329,7 @@ int main(void)
 //			test232_t = MAL_SysTimer_GetTickCount();
 //		}
 
-		/* USER CODE BEGIN 3 */
+
 
 		MAL_LOOP_ProcessHandler();
 		proc_can_rx();
