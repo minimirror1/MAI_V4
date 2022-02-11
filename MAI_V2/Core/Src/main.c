@@ -60,6 +60,8 @@
 /* Private variables ---------------------------------------------------------*/
 CAN_HandleTypeDef hcan1;
 
+IWDG_HandleTypeDef hiwdg;
+
 TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim3;
 TIM_HandleTypeDef htim4;
@@ -68,8 +70,6 @@ DMA_HandleTypeDef hdma_tim4_ch1;
 
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
-
-IWDG_HandleTypeDef hiwdg;
 
 /* USER CODE BEGIN PV */
 
@@ -96,8 +96,8 @@ static void MX_TIM3_Init(void);
 static void MX_TIM4_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_TIM2_Init(void);
-static void MX_IWDG_Init(void);
 static void MX_USART1_UART_Init(void);
+static void MX_IWDG_Init(void);
 /* USER CODE BEGIN PFP */
 /* USER CODE END PFP */
 
@@ -143,26 +143,6 @@ int main(void)
   /* Configure the system clock */
   SystemClock_Config();
 
-#ifdef IWDG_INIT
-	MX_IWDG_Init();
-	HAL_IWDG_Refresh(&hiwdg);
-
-	//__DBGMCU_CLK_ENABLE();
-	//__HAL_RCC_DBGMCU_CLK_ENABLE();
-	//__HAL_DBGMCU_FREEZE_IWDG();
-#endif
-  /* USER CODE END SysInit */
-
-  /* Initialize all configured peripherals */
-  MX_GPIO_Init();
-  MX_DMA_Init();
-  MX_CAN1_Init();
-  MX_TIM3_Init();
-  MX_TIM4_Init();
-  MX_USART2_UART_Init();
-  MX_TIM2_Init();
-  MX_USART1_UART_Init();
-  /* USER CODE BEGIN 2 */
   /* USER CODE BEGIN SysInit */
 
   /* USER CODE END SysInit */
@@ -176,7 +156,16 @@ int main(void)
   MX_USART2_UART_Init();
   MX_TIM2_Init();
   MX_USART1_UART_Init();
+  MX_IWDG_Init();
   /* USER CODE BEGIN 2 */
+  /* USER CODE BEGIN SysInit */
+
+  /* USER CODE END SysInit */
+
+  /* Initialize all configured peripherals */
+  /* USER CODE BEGIN 2 */
+  HAL_IWDG_Refresh(&hiwdg);
+
 	//my_can_id = MAL_Board_ID_GetValue();
 	gm_motion_RX_LED_init(LED_2_GPIO_Port, LED_2_Pin, GPIO_PIN_RESET);
 	gm_motion_TX_LED_init(LED_3_GPIO_Port, LED_3_Pin, GPIO_PIN_RESET);
