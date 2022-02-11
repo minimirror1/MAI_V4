@@ -167,8 +167,8 @@ int main(void)
   HAL_IWDG_Refresh(&hiwdg);
 
 	//my_can_id = MAL_Board_ID_GetValue();
-	gm_motion_RX_LED_init(LED_2_GPIO_Port, LED_2_Pin, GPIO_PIN_RESET);
-	gm_motion_TX_LED_init(LED_3_GPIO_Port, LED_3_Pin, GPIO_PIN_RESET);
+	gm_motion_RX_LED_init(LED_2_GPIO_Port, LED_2_Pin, GPIO_PIN_SET);
+	gm_motion_TX_LED_init(LED_3_GPIO_Port, LED_3_Pin, GPIO_PIN_SET);
 	//MAL_CAN_FilterConfig(&hcan1);
 
 	MAL_MAI_V1_Init();
