@@ -113,7 +113,7 @@ void MAL_MAI_V1_Init(void)
 
 
 	mboard.myCanId = MAL_Board_ID_GetValue();
-    my_can_id = MAL_Board_ID_GetValue();
+    //my_can_id = MAL_Board_ID_GetValue();
 	//MAL_LOOP_ProcessAddr(test_init);
 
 	MAL_LOOP_ProcessAddr(MAL_LED_process);

@@ -177,13 +177,19 @@ int main(void)
   MX_TIM2_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-	my_can_id = MAL_Board_ID_GetValue();
+	//my_can_id = MAL_Board_ID_GetValue();
 	gm_motion_RX_LED_init(LED_2_GPIO_Port, LED_2_Pin, GPIO_PIN_RESET);
 	gm_motion_TX_LED_init(LED_3_GPIO_Port, LED_3_Pin, GPIO_PIN_RESET);
 	//MAL_CAN_FilterConfig(&hcan1);
 
 	MAL_MAI_V1_Init();
-	my_can_id = MAL_Board_ID_GetValue();
+	//my_can_id = MAL_Board_ID_GetValue();
+
+	//idtest
+	set_my_can_id(1);
+	add_my_can_sub_id(1, 1);
+
+
 	can_init_data_save(&hcan1);
 	MAL_Protocol_Ani_EventBootAlm();
 
@@ -631,7 +637,7 @@ static void MX_USART2_UART_Init(void)
 
   /* USER CODE END USART2_Init 1 */
   huart2.Instance = USART2;
-  huart2.Init.BaudRate = 115200;
+  huart2.Init.BaudRate = 9600;
   huart2.Init.WordLength = UART_WORDLENGTH_8B;
   huart2.Init.StopBits = UART_STOPBITS_1;
   huart2.Init.Parity = UART_PARITY_NONE;
