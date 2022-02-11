@@ -187,7 +187,7 @@ int main(void)
 
 	//idtest
 	set_my_can_id(1);
-	add_my_can_sub_id(1, 1);
+	add_my_can_sub_id(MAL_Board_ID_GetValue(), 1);
 
 
 	can_init_data_save(&hcan1);
