@@ -82,7 +82,14 @@ void MAL_Motor_AcPanasonic_232_Alm()
 
 			//app_tx_error_sub_pid_ac_ctl(0,PRIORITY_HIGH, MAL_Board_ID_GetValue(), MASTER_CAN_ID, MOTOR_AXLE_CNT, errorCode);
 			//idtest
-			app_tx_error_sub_pid_ac_ctl(0,PRIORITY_HIGH, MAL_Board_ID_GetValue(), MASTER_CAN_ID,1,0, errorCode);
+			app_tx_error_sub_pid_ac_ctl(
+					0,
+					PRIORITY_HIGH,
+					my_can_id_data.id,
+					MASTER_CAN_ID,
+					my_can_id_data.sub_id[0],
+					0,
+					errorCode);
 
 			t_Alm = MAL_SysTimer_GetTickCount();
 		}
