@@ -84,6 +84,8 @@ typedef struct __MAL_UART_PacketParserTypeDef
 
 	uint32_t len;
 
+	uint32_t seqLen;
+
 	uint8_t buffer[MAL_UART_PACKET_BUFFER];
 
 	MAL_UART_PacketParserCRC32TypeDef crc;

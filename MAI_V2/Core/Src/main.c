@@ -76,6 +76,7 @@ UART_HandleTypeDef huart2;
 MAL_BoardManagerTypeDef mboard;
 
 MAL_CAN_HandleTypeDef mcan1;
+MAL_UART_HandleTypeDef muart1;
 MAL_UART_HandleTypeDef muart2;
 
 MAL_SENSOR_Limit_HandleTypeDef sensor[4];
@@ -175,7 +176,7 @@ int main(void)
 	//my_can_id = MAL_Board_ID_GetValue();
 
 	//idtest
-	set_my_can_id(1);
+
 	add_my_can_sub_id(MAL_Board_ID_GetValue(), 1);
 
 

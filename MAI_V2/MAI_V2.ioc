@@ -135,6 +135,7 @@ PC4.Locked=true
 Dma.TIM4_CH1.1.RequestParameters=Instance,Direction,PeriphInc,MemInc,PeriphDataAlignment,MemDataAlignment,Mode,Priority,FIFOMode
 NVIC.DMA1_Stream0_IRQn=true\:0\:0\:false\:false\:true\:false\:true
 PC5.Signal=GPIO_Input
+NVIC.USART1_IRQn=true\:0\:0\:false\:false\:true\:true\:true
 RCC.SAIBFreq_Value=48000000
 Dma.Request0=TIM3_CH1/TRIG
 CAN1.CalculateTimeBit=999.99

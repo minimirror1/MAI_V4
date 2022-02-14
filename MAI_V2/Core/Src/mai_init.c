@@ -19,11 +19,15 @@
 #include "mal_board_info.h"
 #include "mal_motor_acPana232_v2.h"
 
+#include "mal_motor_comBase.h"
+
 #include "string.h"
 
 
 /* hal */
 extern CAN_HandleTypeDef hcan1;
+
+extern UART_HandleTypeDef huart1;
 extern UART_HandleTypeDef huart2;
 
 extern TIM_HandleTypeDef htim2;
@@ -34,6 +38,8 @@ extern TIM_HandleTypeDef htim4;
 extern MAL_BoardManagerTypeDef mboard;
 
 extern MAL_CAN_HandleTypeDef mcan1;
+
+extern MAL_UART_HandleTypeDef muart1;
 extern MAL_UART_HandleTypeDef muart2;
 
 extern MAL_MOTOR_PanasonicHandleTypeDef mpanasonic;
@@ -49,6 +55,7 @@ void MAL_SENSOR_Init(void);
 void MAL_Motor_Init(void);
 void MAL_Board_VerReg(void);
 void MAL_RS232_Init();
+void MAL_BASE_COM_Init(void);
 //uint16_t IV[200];
 
 uint32_t testCnt;
@@ -110,6 +117,7 @@ void MAL_MAI_V1_Init(void)
 	MAL_MOTOR_Panasonic_Init();
 
 	MAL_RS232_Init();
+	MAL_BASE_COM_Init();
 
 
 	mboard.myCanId = MAL_Board_ID_GetValue();
@@ -144,6 +152,18 @@ void MAL_RS232_Init()
 	MAL_Motor_AcPanasonic_232_RegInit(&muart2);
 	MAL_LOOP_ProcessAddr(MAL_Motor_AcPanasonic_232_Process);
 }
+
+
+
+void MAL_BASE_COM_Init(void)
+{
+	MAL_UART_HandleMatching(&muart1,&huart1);
+	 MAL_UART_RS485Init(&muart1, UART1_RS485_EN_GPIO_Port, UART1_RS485_EN_Pin);
+	MAL_UART_RxAppointment(&muart1);
+	MAL_Motor_ComBase_RegInit(&muart1);
+	MAL_LOOP_ProcessAddr(MAL_Motor_ComBase_Process);
+}
+
 
 void MAL_Motor_Init(void)
 {
