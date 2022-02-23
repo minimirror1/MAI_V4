@@ -17,6 +17,7 @@
 extern MAL_MOTOR_HandleTypeDef mmotor[MOTOR_AXLE_CNT];
 extern MAL_MOTOR_PanasonicHandleTypeDef mpanasonic;//210413
 
+extern MAL_SENSOR_Limit_HandleTypeDef sensor[4];
 MAL_MOTOR_ManagerHandleTypeDef motorManager;
 
 
@@ -165,6 +166,15 @@ void app_rx_init_sub_pid_driver_data1_ctl(uint8_t num, prtc_header_t *pPh, prtc_
 	OppositeLimit = (uint16_t)temp->angle;
 	DefaultLocation = (uint16_t)temp->init_position;
 	ReductionRatio = (uint8_t)temp->reducer_ratio;
+
+	//home sensor 고정
+	if(SensorDirection == MAL_SENSOR_CW)
+	{
+		MAL_Motor_AcPanasonic_SensorLimRegInit(
+					&mpanasonic,
+					&sensor[1],
+					&sensor[0]);
+	}
 
 	//MAL_Motor_AcPanasonic_SetSetting(mmotor[0].ctrHandle, SensorDirection, OppositeLimit, DefaultLocation, ReductionRatio);
 	MAL_Motor_AcPanasonic_SetSetting_Absolute(mmotor[0].ctrHandle, SensorDirection, OppositeLimit, DefaultLocation, ReductionRatio);
