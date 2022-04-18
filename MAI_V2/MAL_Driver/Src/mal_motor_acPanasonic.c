@@ -1053,7 +1053,7 @@ void MAL_Motor_AcPanasonic_ProcessSensorInit(MAL_MOTOR_PanasonicHandleTypeDef *p
 	}
 
 	if (pmpanasonic->setting.SensorDirection == MAL_RO_CW) {
-		if (MAL_SENSOR_GetDetection(pmpanasonic->cwSen) == MAL_SENSOR_SET) {
+		if (MAL_SENSOR_GetDetection(pmpanasonic->ccwSen) == MAL_SENSOR_SET) {
 			pmpanasonic->status.position.now = 0;	// 모터값 초기화
 			pmpanasonic->status.position.target = 0; //타겟 위치를 일치시켜 모터를 정지시킴
 

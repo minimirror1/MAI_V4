@@ -12,10 +12,11 @@
 
 #define MAL_VERSION_MAJER 0
 #define MAL_VERSION_MINOR 0
-#define MAL_VERSION_BUILD 1
+#define MAL_VERSION_BUILD 2
 
 //v5
 //0.0.1 하드웨어 테스트
+//0.0.2 홈 센서 고정 home = ccw
 
 //v4
 //0.0.1 초기버전

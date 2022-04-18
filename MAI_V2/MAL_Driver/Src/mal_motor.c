@@ -167,14 +167,15 @@ void app_rx_init_sub_pid_driver_data1_ctl(uint8_t num, prtc_header_t *pPh, prtc_
 	DefaultLocation = (uint16_t)temp->init_position;
 	ReductionRatio = (uint8_t)temp->reducer_ratio;
 
+	//제거 2022.04.18
 	//home sensor 고정
-	if(SensorDirection == MAL_SENSOR_CW)
-	{
-		MAL_Motor_AcPanasonic_SensorLimRegInit(
-					&mpanasonic,
-					&sensor[1],
-					&sensor[0]);
-	}
+//	if(SensorDirection == MAL_SENSOR_CW)
+//	{
+//		MAL_Motor_AcPanasonic_SensorLimRegInit(
+//					&mpanasonic,
+//					&sensor[1],
+//					&sensor[0]);
+//	}
 
 	//MAL_Motor_AcPanasonic_SetSetting(mmotor[0].ctrHandle, SensorDirection, OppositeLimit, DefaultLocation, ReductionRatio);
 	MAL_Motor_AcPanasonic_SetSetting_Absolute(mmotor[0].ctrHandle, SensorDirection, OppositeLimit, DefaultLocation, ReductionRatio);
@@ -458,8 +459,10 @@ void MAL_Protocol_Ani_EventSensorDetect(MAL_SENSOR_LimitIDTypeDef *axleId, uint1
 			MASTER_CAN_ID,
 			my_can_id_data.sub_id[0],
 			0,
-			MAL_SENSOR_GetDetection(mpanasonic.cwSen),
-			MAL_SENSOR_GetDetection(mpanasonic.ccwSen)
+			MAL_SENSOR_GetDetection(mpanasonic.ccwSen),
+			MAL_SENSOR_GetDetection(mpanasonic.cwSen)
+			//MAL_SENSOR_GetDetection(mpanasonic.cwSen),
+			//MAL_SENSOR_GetDetection(mpanasonic.ccwSen)
 			);
 }
 
