@@ -141,7 +141,7 @@ void MAL_Motor_AcPanasonic_ProcessSensorAlm(MAL_MOTOR_PanasonicHandleTypeDef *pm
 		}
 	}
 
-	if (pmpanasonic->setting.flag == MAL_SEN_INIT_OK) {
+	if ((pmpanasonic->setting.flag == MAL_SEN_INIT_OK) || (pmpanasonic->setting.flag == MAL_SEN_DEF_LOCATION)) {
 
 		if ((MAL_SENSOR_GetDetection(pmpanasonic->cwSen) == MAL_SENSOR_SET) || (MAL_SENSOR_GetDetection(pmpanasonic->ccwSen) == MAL_SENSOR_SET)) {
 			if ((pmpanasonic->cwSen->status.f_newEvent == SET) || (pmpanasonic->ccwSen->status.f_newEvent == SET)) {
