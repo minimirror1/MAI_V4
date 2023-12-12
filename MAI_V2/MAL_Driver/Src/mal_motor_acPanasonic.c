@@ -425,7 +425,7 @@ void MAL_Motor_AcPanasonic_SetChangeTarget(MAL_MOTOR_PanasonicHandleTypeDef *pmp
 	}
 }
 
-void MAL_Motor_AcPanasonic_SetSettingVal(MAL_MOTOR_PanasonicHandleTypeDef *pmpanasonic, uint8_t SensorDirection, uint16_t OppositeLimit, uint16_t DefaultLocation, uint8_t ReductionRatio) {
+void MAL_Motor_AcPanasonic_SetSettingVal(MAL_MOTOR_PanasonicHandleTypeDef *pmpanasonic, uint8_t SensorDirection, uint16_t OppositeLimit, uint16_t DefaultLocation, uint16_t ReductionRatio) {
 	pmpanasonic->setting.reductionPuls = 0;
 	pmpanasonic->setting.jogCount = 0;
 
@@ -589,7 +589,7 @@ int32_t MAL_Motor_AcPanasonic_CalcAbsoToCount(MAL_MOTOR_PanasonicHandleTypeDef *
 }
 
 uint8_t MAL_Motor_AcPanasonic_SetSettingVal_AbsoluteVal(MAL_MOTOR_PanasonicHandleTypeDef *pmpanasonic, uint8_t SensorDirection, uint16_t OppositeLimit, uint16_t DefaultLocation,
-		uint8_t ReductionRatio) {
+		uint16_t ReductionRatio) {
 	uint8_t ret = 0; 		//실패
 
 	mAc232_Fnc.C2M1.readFlag = RESET;
@@ -1395,7 +1395,7 @@ void MAL_Motor_AcPanasonic_SetLocation(uint32_t *pmpanasonic, uint16_t location)
 	MAL_Motor_AcPanasonic_SetChangeTarget((MAL_MOTOR_PanasonicHandleTypeDef*) pmpanasonic, location);
 }
 
-void MAL_Motor_AcPanasonic_SetSetting(uint32_t *pmpanasonic, uint8_t SensorDirection, uint16_t OppositeLimit, uint16_t DefaultLocation, uint8_t ReductionRatio) {
+void MAL_Motor_AcPanasonic_SetSetting(uint32_t *pmpanasonic, uint8_t SensorDirection, uint16_t OppositeLimit, uint16_t DefaultLocation, uint16_t ReductionRatio) {
 	MAL_Motor_AcPanasonic_SetSettingVal((MAL_MOTOR_PanasonicHandleTypeDef*) pmpanasonic, SensorDirection, OppositeLimit, DefaultLocation, ReductionRatio);
 
 }
@@ -1404,7 +1404,7 @@ void MAL_Motor_AcPanasonic_StartInit(uint32_t *pmpanasonic)
 	MAL_Motor_AcPanasonic_StartSenPosi((MAL_MOTOR_PanasonicHandleTypeDef*) pmpanasonic);
 }
 //20201104
-uint8_t MAL_Motor_AcPanasonic_SetSetting_Absolute(uint32_t *pmpanasonic, uint8_t SensorDirection, uint16_t OppositeLimit, uint16_t DefaultLocation, uint8_t ReductionRatio) {
+uint8_t MAL_Motor_AcPanasonic_SetSetting_Absolute(uint32_t *pmpanasonic, uint8_t SensorDirection, uint16_t OppositeLimit, uint16_t DefaultLocation, uint16_t ReductionRatio) {
 	return MAL_Motor_AcPanasonic_SetSettingVal_AbsoluteVal((MAL_MOTOR_PanasonicHandleTypeDef*) pmpanasonic, SensorDirection, OppositeLimit, DefaultLocation, ReductionRatio);
 }
 void MAL_Motor_AcPanasonic_SetDefaultLocation(uint32_t *pmpanasonic) {

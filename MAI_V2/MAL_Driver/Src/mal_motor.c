@@ -107,6 +107,7 @@ void app_rx_init_sub_pid_move_sensor_ctl(uint8_t num, prtc_header_t *pPh, uint8_
 				my_can_id_data.id,
 				MASTER_CAN_ID,
 				my_can_id_data.sub_id[0],
+				0,
 				0);
 }
 
@@ -142,7 +143,7 @@ void app_rx_motion_sub_pid_adc_ctl(uint8_t num, prtc_header_t *pPh, prtc_data_ct
 
 
 //=============================================================================================================
-/*void MAL_Motor_SetSetting(uint8_t axleId, uint8_t SensorDirection, uint16_t OppositeLimit, uint16_t DefaultLocation, uint8_t ReductionRatio)
+/*void MAL_Motor_SetSetting(uint8_t axleId, uint8_t SensorDirection, uint16_t OppositeLimit, uint16_t DefaultLocation, uint16_t ReductionRatio)
 {
 	if (MOTOR_AXLE_CNT <= axleId) return;
 	mmotor[axleId].mal_motor_setSettingCallBack(mmotor[axleId].ctrHandle, SensorDirection, OppositeLimit, DefaultLocation, ReductionRatio);
@@ -158,14 +159,14 @@ void app_rx_init_sub_pid_driver_data1_ctl(uint8_t num, prtc_header_t *pPh, prtc_
 	uint8_t SensorDirection;
 	uint16_t OppositeLimit;
 	uint16_t DefaultLocation;
-	uint8_t ReductionRatio;
+	uint16_t ReductionRatio;
 
 	prtc_data_ctl_init_driver_data1_t *temp = (prtc_data_ctl_init_driver_data1_t *)pData;
 
 	SensorDirection = (uint8_t)temp->direction;
 	OppositeLimit = (uint16_t)temp->angle;
 	DefaultLocation = (uint16_t)temp->init_position;
-	ReductionRatio = (uint8_t)temp->reducer_ratio;
+	ReductionRatio = (uint16_t)temp->reducer_ratio;
 
 	//제거 2022.04.18
 	//home sensor 고정
@@ -195,7 +196,7 @@ void app_rx_init_sub_pid_driver_data1_ctl(uint8_t num, prtc_header_t *pPh, prtc_
 //=============================================================================================================
 
 //=============================================================================================================
-/*uint8_t MAL_Motor_SetSetting_Absolute(uint8_t axleId, uint8_t SensorDirection, uint16_t OppositeLimit, uint16_t DefaultLocation, uint8_t ReductionRatio)
+/*uint8_t MAL_Motor_SetSetting_Absolute(uint8_t axleId, uint8_t SensorDirection, uint16_t OppositeLimit, uint16_t DefaultLocation, uint16_t ReductionRatio)
 {
 	if (MOTOR_AXLE_CNT <= axleId) return 0;
 	return mmotor->mal_motor_setSetting_AbsoluteCallBack(mmotor[axleId].ctrHandle, SensorDirection, OppositeLimit, DefaultLocation, ReductionRatio);
@@ -379,7 +380,8 @@ void app_rx_init_sub_pid_absolute_battery_rqt(uint8_t num, prtc_header_t *pPh, u
 			MASTER_CAN_ID,
 			my_can_id_data.sub_id[0],
 			0,
-			MAL_Motor_GetAbsoCountOk(0));
+			//MAL_Motor_GetAbsoCountOk(my_can_id_data.sub_id[0]));
+			MAL_Motor_GetAbsoCountOk(my_can_id_data.sub_id[0]));//230307 보드 아이디 검사.
 }
 
 // event

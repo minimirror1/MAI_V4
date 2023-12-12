@@ -68,8 +68,8 @@ typedef struct __MAL_MOTOR_HandleTypeDef
 	//set
 	void (*mal_motor_setLocationCallBack)(uint32_t *ctrHandle, uint16_t location);
 	void (*mal_motor_setBldcInfoCallBack)(uint32_t *ctrHandle, uint16_t count, uint16_t rpm);
-	void (*mal_motor_setSettingCallBack)(uint32_t *ctrHandle, uint8_t SensorDirection,uint16_t OppositeLimit,uint16_t DefaultLocation,uint8_t ReductionRatio);
-	uint8_t (*mal_motor_setSetting_AbsoluteCallBack)(uint32_t *ctrHandle, uint8_t SensorDirection,uint16_t OppositeLimit,uint16_t DefaultLocation,uint8_t ReductionRatio);
+	void (*mal_motor_setSettingCallBack)(uint32_t *ctrHandle, uint8_t SensorDirection,uint16_t OppositeLimit,uint16_t DefaultLocation,uint16_t ReductionRatio);
+	uint8_t (*mal_motor_setSetting_AbsoluteCallBack)(uint32_t *ctrHandle, uint8_t SensorDirection,uint16_t OppositeLimit,uint16_t DefaultLocation,uint16_t ReductionRatio);
 	void (*mal_motor_setDefaultLocationCallBack)(uint32_t *ctrHandle);
 	void (*mal_motor_setJogCounter)(uint32_t *ctrHandle, int16_t counter);
 
@@ -112,7 +112,7 @@ extern void MAL_Motor_SetSetting(
 		uint8_t SensorDirection,
 		uint16_t OppositeLimit,
 		uint16_t DefaultLocation,
-		uint8_t ReductionRatio);
+		uint16_t ReductionRatio);
 extern void MAL_Motor_SetDefaultLocation(uint8_t axleId);
 //get
 extern uint8_t MAL_Motor_GetSettingFlag(uint8_t axleId);

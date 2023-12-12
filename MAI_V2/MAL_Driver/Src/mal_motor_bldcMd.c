@@ -607,7 +607,7 @@ void MAL_Motor_BldcMd_SetBldcInfo(uint32_t *mbldcMd, uint16_t count, uint16_t rp
 }
 
 void MAL_Motor_BldcMd_SetSettingVal(MAL_MOTOR_BLDCMDHandleTypeDef *mbldcMd, uint8_t SensorDirection, uint16_t OppositeLimit, uint16_t DefaultLocation,
-		uint8_t ReductionRatio)
+		uint16_t ReductionRatio)
 {
 	mbldcMd->setting.f_infoRev = SET;
 
@@ -662,7 +662,7 @@ void MAL_Motor_BldcMd_SetDefaultLocation(uint32_t *mbldcMd)
 	MAL_Protocol_Ani_RspDefPosi(temp->status.axleNum, MAL_SEN_INIT_OK);
 }
 
-void MAL_Motor_BldcMd_SetSetting(uint32_t *mbldcMd, uint8_t SensorDirection, uint16_t OppositeLimit, uint16_t DefaultLocation, uint8_t ReductionRatio)
+void MAL_Motor_BldcMd_SetSetting(uint32_t *mbldcMd, uint8_t SensorDirection, uint16_t OppositeLimit, uint16_t DefaultLocation, uint16_t ReductionRatio)
 {
 	MAL_Motor_BldcMd_SetSettingVal((MAL_MOTOR_BLDCMDHandleTypeDef*) mbldcMd, SensorDirection, OppositeLimit, DefaultLocation, ReductionRatio);
 }

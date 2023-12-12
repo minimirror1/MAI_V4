@@ -90,7 +90,7 @@ typedef struct __MAL_MOTOR_PanasonicSettingTypeDef
 	uint8_t SensorDirection; 	//센서방향
 	uint16_t OppositeLimit;		//반대편 한계 각도(카운터로 변환해야됨)
 	uint16_t DefaultLocation;	//초기화 후 위치(초기위치)
-	uint8_t ReductionRatio; 	//감속기 감속비
+	uint16_t ReductionRatio; 	//감속기 감속비
 	MAL_MOTOR_SensorInit_TypeDef flag;				//세팅 여부 flag
 
 	uint8_t offsetFlag;
@@ -121,7 +121,7 @@ typedef struct __MAL_MOTOR_PanasonicSettingTypeDef
 	uint8_t absoReadOk; //20201103
 	uint8_t absoRetryCnt;//20201103
 	int32_t absoCount;//20201103
-	uint8_t absoStatus;//20201103
+	uint8_t absoStatus;//20201103	// 0:None, 1:ok, 2:battery error, 3:timeout
 
 	float absoCntToCnt;//20201104 엡소 값 카운트 변경
 }MAL_MOTOR_PanasonicSettingTypeDef;
@@ -206,13 +206,13 @@ extern void MAL_Motor_AcPanasonic_SetSetting(
 		uint8_t SensorDirection,
 		uint16_t OppositeLimit,
 		uint16_t DefaultLocation,
-		uint8_t ReductionRatio);
+		uint16_t ReductionRatio);
 extern uint8_t MAL_Motor_AcPanasonic_SetSetting_Absolute(
 		uint32_t *pmpanasonic,
 		uint8_t SensorDirection,
 		uint16_t OppositeLimit,
 		uint16_t DefaultLocation,
-		uint8_t ReductionRatio);
+		uint16_t ReductionRatio);
 extern void MAL_Motor_AcPanasonic_SetDefaultLocation(uint32_t *pmpanasonic);
 extern void MAL_Motor_AcPanasonic_SetCounter(uint32_t *pmpanasonic, int16_t counter);
 extern void MAL_Motor_AcPanasonic_SetLoadAbsoCnt(uint32_t *pmpanasonic, uint32_t loadAbsoCnt);//20201103

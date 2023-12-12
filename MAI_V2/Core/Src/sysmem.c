@@ -35,6 +35,7 @@ register char * stack_ptr asm("sp");
  _sbrk
  Increase program data space. Malloc and related functions depend on this
 **/
+#if 0
 caddr_t _sbrk(int incr)
 {
 	extern char end asm("end");
@@ -55,4 +56,5 @@ caddr_t _sbrk(int incr)
 
 	return (caddr_t) prev_heap_end;
 }
+#endif
 

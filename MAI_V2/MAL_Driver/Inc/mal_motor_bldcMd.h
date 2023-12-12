@@ -62,7 +62,7 @@ typedef struct __MAL_MOTOR_BLDCMDSettingTypeDef
 	uint8_t SensorDirection; 	//센서방향
 	uint16_t OppositeLimit;		//반대편 한계 각도(카운터로 변환해야됨)
 	uint16_t DefaultLocation;	//초기화 후 위치(초기위치)
-	uint8_t ReductionRatio; 	//감속기 감속비
+	uint16_t ReductionRatio; 	//감속기 감속비
 	MAL_MOTOR_SensorInit_TypeDef flag;				//세팅 여부 flag
 
 	uint32_t t_emergency;
@@ -137,14 +137,14 @@ extern void MAL_Motor_BldcMd_SetBldcInfo(uint32_t *mbldcMd, uint16_t count, uint
 
 extern void MAL_Motor_BldcMd_SetDefaultLocation(uint32_t *mbldcMd);
 extern void MAL_Motor_BldcMd_SetSettingVal(MAL_MOTOR_BLDCMDHandleTypeDef *mbldcMd, uint8_t SensorDirection, uint16_t OppositeLimit, uint16_t DefaultLocation,
-		uint8_t ReductionRatio);
+		uint16_t ReductionRatio);
 extern void MAL_Motor_BldcMd_SetLocation(uint32_t *mbldcMd, uint16_t location);
 extern void MAL_Motor_BldcMd_SetSetting(
 		uint32_t *mbldcMd,
 		uint8_t SensorDirection,
 		uint16_t OppositeLimit,
 		uint16_t DefaultLocation,
-		uint8_t ReductionRatio);
+		uint16_t ReductionRatio);
 
 extern void MAL_Motor_BldcMd_SetJogCounter(uint32_t *mbldcMd, int16_t counter);
 
