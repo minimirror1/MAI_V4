@@ -68,7 +68,9 @@ void app_rx_error_sub_pid_clear_ctl(uint8_t num, prtc_header_t *pPh, prtc_data_c
 	MAL_Motor_AcPanasonic_232_SetAbsoluteClear();
 	MAL_Motor_AcPanasonic_232_SetAlmClear();
 }
+
 //210625
+//240108 예전 에러코드 사용안함.
 void MAL_Motor_AcPanasonic_232_Alm()
 {
 	static uint32_t t_Alm = 0;
@@ -97,7 +99,7 @@ void MAL_Motor_AcPanasonic_232_Alm()
 }
 void MAL_Motor_AcPanasonic_232_Process(void) {
 	MAL_Motor_AcPanasonic_232_CheckQueue();
-	MAL_Motor_AcPanasonic_232_Alm();
+	//MAL_Motor_AcPanasonic_232_Alm();
 }
 
 void MAL_Motor_AcPanasonic_232_RegInit(MAL_UART_HandleTypeDef *muart) {

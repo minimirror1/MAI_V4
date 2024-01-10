@@ -9,6 +9,9 @@
 #include "mal_motor_acPana232Func.h"
 #include "mal_motor_acPanasonic.h"
 
+#include "app_pid_error_cmd.h"
+#include "string.h"
+#include "stdio.h"
 //#include "eeprom.h"
 //#include "eeprom_data.h"
 
@@ -206,6 +209,25 @@ void MAL_Motor_AcPanasonic_232_GetAbsoluteCounter(void)
 //=================================================================================================
 //=================================================================================================
 
+
+//240108
+uint8_t rsp_codeMain = 0;
+uint8_t rsp_codeSub = 0;
+void app_rx_error_sub_pid_error_level_rsp(uint8_t num, prtc_header_t *pPh, prtc_data_rsp_error_level_t *pData){
+	char *token;
+	int num1, num2;
+
+	// '.'을 기준으로 문자열 분리
+	token = strtok(pData->err_lv_str, ".");
+	if (token != NULL) {
+		rsp_codeMain = atoi(token); // 첫 번째 숫자 변환
+		token = strtok(NULL, ".");
+		if (token != NULL) {
+			rsp_codeSub = atoi(token); // 두 번째 숫자 변환
+		}
+	}
+
+}
 //=================================================================================================
 //=============command 9
 //=================================================================================================
@@ -232,8 +254,34 @@ void MAL_Motor_AcPanasonic_232_GetAlmNumber_CallBack(uint8_t *data)
 		mAc232_Fnc.C9M0.ctrStatus = RESET;
 	}
 
+	char errorStr[20] = {0,};
+
 	mAc232_Fnc.C9M0.codeMain = pData->codeMain;
 	mAc232_Fnc.C9M0.codeSub = pData->codeSub;
+
+	//error 없음, 송신 성공 에러 코드 클리어
+	if(pData->codeMain == 0 && pData->codeSub == 0){
+		rsp_codeMain = 0;
+		rsp_codeSub = 0;
+		return;
+	}
+
+	//예외처리 송신 성공 에러코드는 재전송 하지 않음.
+	if(pData->codeMain == rsp_codeMain && pData->codeSub == rsp_codeSub)
+		return;
+
+	sprintf(errorStr, "%d.%d", mAc232_Fnc.C9M0.codeMain, mAc232_Fnc.C9M0.codeSub);
+
+	app_tx_error_sub_pid_error_level_ctl(
+			0, 							//CAN1
+			PRIORITY_HIGH, 				//우선순위
+			my_can_id_data.id,			//srcID
+			MASTER_CAN_ID, 				//tarID
+			my_can_id_data.sub_id[0],	//srcSubID
+			0, 							//tarSubID
+			2, 							//motorType [2] : AC
+			errorStr					//Error String
+			);
 }
 void MAL_Motor_AcPanasonic_232_GetAlmNumber(void)
 {
