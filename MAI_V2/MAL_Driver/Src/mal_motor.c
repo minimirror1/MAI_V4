@@ -12,6 +12,7 @@
 #include "mal_motor_bldcMd.h"
 
 #include "app_pid_init_cmd.h"
+#include "app_pid_inspection_cmd.h"
 
 #ifdef HAL_MOTOR_MODULE_ENABLED
 extern MAL_MOTOR_HandleTypeDef mmotor[MOTOR_AXLE_CNT];
@@ -286,6 +287,45 @@ void app_rx_motion_sub_pid_direction_ctl(uint8_t num, prtc_header_t *pPh, prtc_d
 
 
 	mmotor[0].mal_motor_setJogCounter(mmotor[0].ctrHandle, counter);
+}
+
+
+void app_rx_inspection_sub_pid_data_ctl(uint8_t num, prtc_header_t *pPh, prtc_data_ctl_inspection_data_t *pData)
+{
+	switch(pData->index)
+	{
+		case INSPECTION_PING:
+		{
+			prtc_data_ctl_inspection_ping_data_t *pCdcipd = (prtc_data_ctl_inspection_ping_data_t *)pData->payload;
+			app_tx_inspection_sub_pid_data_ping_rsp(
+					num,
+					PRIORITY_NOMAL,
+					my_can_id_data.id,
+					pPh->souce_id,
+					my_can_id_data.sub_id[0],
+					pPh->souce_sub_id,
+					INSPECTION_PING,
+					pCdcipd->count);
+		}
+		break;
+		case INSPECTION_VER:
+		{
+			prtc_data_rsp_inspection_ver_data_t device_ver_rec;
+			device_ver_rec.ver1 = MAL_VERSION_MAJER;
+			device_ver_rec.ver2 = MAL_VERSION_MINOR;
+			device_ver_rec.ver3 = MAL_VERSION_BUILD;
+			app_tx_inspection_sub_pid_data_ver_rsp(
+					num,
+					PRIORITY_NOMAL,
+					my_can_id_data.id,
+					pPh->souce_id,
+					my_can_id_data.sub_id[0],
+					pPh->souce_sub_id,
+					INSPECTION_VER,
+					device_ver_rec.ver);
+		}
+		break;
+	}
 }
 //=============================================================================================================
 
