@@ -1,3 +1,6 @@
 [submodule "MAI_V2/Component/GM_MOTION"]
 	path = MAI_V2/Component/GM_MOTION
 	url = https://github.com/KimJunHyung1991/GM_MOTION
+[submodule "MAI_V2/Component/cpp_Motor_Class"]
+	path = MAI_V2/Component/cpp_Motor_Class
+	url = https://github.com/minimirror1/cpp_Motor_Class_v2.git
