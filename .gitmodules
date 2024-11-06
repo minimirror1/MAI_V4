@@ -4,3 +4,6 @@
 [submodule "MAI_V2/Component/cpp_Motor_Class"]
 	path = MAI_V2/Component/cpp_Motor_Class
 	url = https://github.com/minimirror1/cpp_Motor_Class_v2.git
+[submodule "MAI_V2/Component/cpp_tick"]
+	path = MAI_V2/Component/cpp_tick
+	url = https://github.com/minimirror1/cpp_tick.git
