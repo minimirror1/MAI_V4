@@ -94,7 +94,7 @@ void MAL_SENSOR_LimitTrigger(MAL_SENSOR_Limit_HandleTypeDef *msensor)
 		msensor->status.f_newEvent = SET;
 
 
-		ProtocolConnect_EventSensorDetect(&msensor->setting.id, (uint16_t)msensor->status.new);
+		ProtocolConnect_EventSensorDetect(msensor->setting.id.sum, (uint16_t)msensor->status.new);
 	}
 }
 
