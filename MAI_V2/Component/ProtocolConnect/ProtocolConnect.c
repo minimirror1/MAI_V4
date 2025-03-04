@@ -46,7 +46,7 @@ void ProtocolConnect_RspAcAbsoBatteryOk(uint8_t axleId)
 			);
 }
 
-void ProtocolConnect_RspSensorInitSuccess(uint8_t axleId,int32_t absoCnt)
+void ProtocolConnect_RspSensorInitSuccess(uint8_t axleId,int64_t absoCnt)
 {
 	app_tx_init_sub_pid_absolute_battery_ctl(
 			0,
@@ -162,12 +162,12 @@ void app_rx_init_sub_pid_driver_data1_ctl(uint8_t num, prtc_header_t *pPh, prtc_
 
 void app_rx_init_sub_pid_absolute_battery_ctl(uint8_t num, prtc_header_t *pPh, prtc_data_ctl_init_absolute_battery_t *pData)
 {
-	uint32_t absoData = 0;
+	int64_t absoData = 0;
 	if((my_can_id_data.id != pPh->target_id)||(my_can_id_data.sub_id[0] != pPh->target_sub_id))
 			return;
 
 	prtc_data_ctl_init_absolute_battery_t *temp = (prtc_data_ctl_init_absolute_battery_t *)pData;
-	absoData = (uint32_t)temp->save_data;
+	absoData = (int64_t)temp->save_data;
 
 	mpanasonic.setting.absoCount = absoData;
 
@@ -280,7 +280,7 @@ void app_rx_init_sub_pid_absolute_battery_rqt(uint8_t num, prtc_header_t *pPh, u
 	if((my_can_id_data.id != pPh->target_id)||(my_can_id_data.sub_id[0] != pPh->target_sub_id))
 			return;
 
-	uint32_t absoCount = 0;
+	int64_t absoCount = 0;
 
     if(my_can_id_data.sub_id[0] != my_can_id_data.sub_id[0]){
         app_tx_init_sub_pid_absolute_battery_rsp(

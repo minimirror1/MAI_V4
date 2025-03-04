@@ -497,7 +497,7 @@ int32_t MAL_Motor_AcPanasonic_CalcAbsoToCount(MAL_MOTOR_PanasonicHandleTypeDef *
 	if (pmpanasonic->setting.absoCount == 0)
 		return 0;
 	int32_t returnCnt = 0;
-	int32_t OffsetCnt;
+	int64_t OffsetCnt; //250304
 	double OffsetTemp;
 	if (pmpanasonic->setting.SensorDirection == MAL_RO_CW) {
 
@@ -505,13 +505,13 @@ int32_t MAL_Motor_AcPanasonic_CalcAbsoToCount(MAL_MOTOR_PanasonicHandleTypeDef *
 
 		OffsetTemp = (double) OffsetCnt / 0x007FFFFF * 10000;
 
-		OffsetCnt = (int32_t) OffsetTemp;
+		OffsetCnt = (int64_t) OffsetTemp;
 	} else if (pmpanasonic->setting.SensorDirection == MAL_RO_CCW) {
-		OffsetCnt = (int32_t) pmpanasonic->setting.absoCount;
+		OffsetCnt = (int64_t) pmpanasonic->setting.absoCount;
 
 		OffsetTemp = (double) OffsetCnt / 0x007FFFFF * 10000;
 
-		OffsetCnt = (int32_t) OffsetTemp;
+		OffsetCnt = (int64_t) OffsetTemp;
 	}
 
 	double nowAbsoSt1Temp = 0;
@@ -947,7 +947,7 @@ HAL_StatusTypeDef MAL_Motor_AcPanasonic_WaitAbsoRead(MAL_MOTOR_PanasonicHandleTy
 		break;
 	case 2:
 		if (mAc232_Fnc.C2Md.ctrStatus == RESET) { //클리어 성공하면
-			pmpanasonic->setting.absoCount = mAc232_Fnc.C2Md.st1_cnt;
+			pmpanasonic->setting.absoCount = (int64_t)mAc232_Fnc.C2Md.st1_cnt;
 
 			//변수 초기화
 			timeFlag = SET;

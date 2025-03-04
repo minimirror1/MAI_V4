@@ -126,7 +126,7 @@ typedef struct{
 	uint8_t f_test;
 	int32_t f_absoVal[2];
 
-	int32_t *absoVal;
+	int64_t *absoVal;
 }v6_Typedef;
 //-------------------------------------------------------------------
 

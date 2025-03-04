@@ -120,7 +120,8 @@ typedef struct __MAL_MOTOR_PanasonicSettingTypeDef
 	uint8_t absoReadFlag;//20201103
 	uint8_t absoReadOk; //20201103
 	uint8_t absoRetryCnt;//20201103
-	int32_t absoCount;//20201103
+	//int32_t absoCount;//20201103
+	int64_t absoCount;//20250304
 	uint8_t absoStatus;//20201103	// 0:None, 1:ok, 2:battery error, 3:timeout
 
 	float absoCntToCnt;//20201104 엡소 값 카운트 변경
