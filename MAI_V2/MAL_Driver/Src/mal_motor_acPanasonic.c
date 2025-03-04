@@ -7,7 +7,8 @@
 
 #include "main.h"
 #include "mal_motor_acPanasonic.h"
-#include "mal_motor.h"
+//#include "mal_motor.h"
+#include "ProtocolConnect.h"
 #include "mal_systimer.h"
 #include "math.h"
 
@@ -16,6 +17,8 @@
 
 
 #include "mal_motor_acPanaCurve.h"
+
+
 
 #ifdef HAL_MOTOR_AC_MODULE_ENABLED
 
@@ -137,7 +140,8 @@ void MAL_Motor_AcPanasonic_ProcessSensorAlm(MAL_MOTOR_PanasonicHandleTypeDef *pm
 	if (pmpanasonic->setting.flag == MAL_SEN_EMERGENCY_STOP) {
 		if (MAL_SysTimer_Elapsed(pmpanasonic->setting.t_emergency) >= 500) {
 			pmpanasonic->setting.t_emergency = MAL_SysTimer_GetTickCount();
-			MAL_Protocol_Ani_AlmSensorDetection(pmpanasonic->status.axleNum, MAL_SENSOR_GetDetection(pmpanasonic->cwSen), MAL_SENSOR_GetDetection(pmpanasonic->ccwSen));
+			ProtocolConnect_sensor_detect_ctl(pmpanasonic->status.axleNum, MAL_SENSOR_GetDetection(pmpanasonic->cwSen), MAL_SENSOR_GetDetection(pmpanasonic->ccwSen));
+
 		}
 	}
 
@@ -149,7 +153,7 @@ void MAL_Motor_AcPanasonic_ProcessSensorAlm(MAL_MOTOR_PanasonicHandleTypeDef *pm
 				pmpanasonic->ccwSen->status.f_newEvent = RESET;
 
 				pmpanasonic->setting.flag = MAL_SEN_EMERGENCY_STOP;
-				MAL_Protocol_Ani_AlmSensorDetection(pmpanasonic->status.axleNum, MAL_SENSOR_GetDetection(pmpanasonic->cwSen), MAL_SENSOR_GetDetection(pmpanasonic->ccwSen));
+				ProtocolConnect_sensor_detect_ctl(pmpanasonic->status.axleNum, MAL_SENSOR_GetDetection(pmpanasonic->cwSen), MAL_SENSOR_GetDetection(pmpanasonic->ccwSen));
 			}
 		}
 	}
@@ -173,12 +177,12 @@ void MAL_Motor_AcPanasonic_ProcessGetAbsoluteCounter(MAL_MOTOR_PanasonicHandleTy
 				pmpanasonic->setting.absoReadFlag = RESET;
 				MAL_Motor_AcPanasonic_232_SetAbsoluteClear(); //엡솔루트 클리어 요청
 				MAL_Motor_AcPanasonic_232_SetAlmClear();
-				MAL_Protocol_Ani_RspAcAbsoBatteryOk(pmpanasonic->status.axleNum);
+				ProtocolConnect_RspAcAbsoBatteryOk(pmpanasonic->status.axleNum);
 			} else {
 				pmpanasonic->setting.absoStatus = 1; //ok
 				pmpanasonic->setting.absoRetryCnt = 0;
 				pmpanasonic->setting.absoReadFlag = RESET;
-				MAL_Protocol_Ani_RspAcAbsoBatteryOk(pmpanasonic->status.axleNum);
+				ProtocolConnect_RspAcAbsoBatteryOk(pmpanasonic->status.axleNum);
 			}
 		}
 
@@ -186,7 +190,7 @@ void MAL_Motor_AcPanasonic_ProcessGetAbsoluteCounter(MAL_MOTOR_PanasonicHandleTy
 			pmpanasonic->setting.absoStatus = 3; //timeout
 			pmpanasonic->setting.absoRetryCnt = 0;
 			pmpanasonic->setting.absoReadFlag = RESET;
-			MAL_Protocol_Ani_RspAcAbsoBatteryOk(pmpanasonic->status.axleNum);
+			ProtocolConnect_RspAcAbsoBatteryOk(pmpanasonic->status.axleNum);
 		}
 	}
 }
@@ -1030,7 +1034,7 @@ void MAL_Motor_AcPanasonic_ProcessSensorInit(MAL_MOTOR_PanasonicHandleTypeDef *p
 							pmpanasonic->setting.DefultLocTempCnt = 0;
 
 							//20201104 폴링응답하도록 삭제
-							MAL_Protocol_Ani_RspSensorInitSuccess(pmpanasonic->status.axleNum,pmpanasonic->setting.absoCount);
+							ProtocolConnect_RspSensorInitSuccess(pmpanasonic->status.axleNum,pmpanasonic->setting.absoCount);
 						} else if (pmpanasonic->setting.SensorDirection == MAL_RO_CCW) {
 							pmpanasonic->status.position.now = 0;	// 모터값 초기화
 							pmpanasonic->status.position.target = 0; //타겟 위치를 일치시켜 모터를 정지시킴
@@ -1043,7 +1047,7 @@ void MAL_Motor_AcPanasonic_ProcessSensorInit(MAL_MOTOR_PanasonicHandleTypeDef *p
 							pmpanasonic->setting.DefultLocTemp = 0;
 							pmpanasonic->setting.DefultLocTempCnt = 0;
 
-							MAL_Protocol_Ani_RspSensorInitSuccess(pmpanasonic->status.axleNum,pmpanasonic->setting.absoCount);
+							ProtocolConnect_RspSensorInitSuccess(pmpanasonic->status.axleNum,pmpanasonic->setting.absoCount);
 						}
 					}
 				}
@@ -1071,7 +1075,7 @@ void MAL_Motor_AcPanasonic_ProcessSensorInit(MAL_MOTOR_PanasonicHandleTypeDef *p
 			pmpanasonic->setting.DefultLocTemp = 0;
 			pmpanasonic->setting.DefultLocTempCnt = 0;
 
-			//MAL_Protocol_Ani_RspSensorInitSuccess(pmpanasonic->status.axleNum);
+			//ProtocolConnect_RspSensorInitSuccess(pmpanasonic->status.axleNum);
 		} else {
 			MAL_Motor_AcPanasonic_SetJog1degree(pmpanasonic, pmpanasonic->setting.jogCount, 1);
 		}
@@ -1094,7 +1098,7 @@ void MAL_Motor_AcPanasonic_ProcessSensorInit(MAL_MOTOR_PanasonicHandleTypeDef *p
 			pmpanasonic->setting.DefultLocTemp = 0;
 			pmpanasonic->setting.DefultLocTempCnt = 0;
 
-			//MAL_Protocol_Ani_RspSensorInitSuccess(pmpanasonic->status.axleNum);
+			//ProtocolConnect_RspSensorInitSuccess(pmpanasonic->status.axleNum);
 		} else {
 			MAL_Motor_AcPanasonic_SetJog1degree(pmpanasonic, pmpanasonic->setting.jogCount, 1);
 		}
@@ -1120,7 +1124,7 @@ void MAL_Motor_AcPanasonic_ProcessSensorInit(MAL_MOTOR_PanasonicHandleTypeDef *p
 
 	 pmpanasonic->setting.DefultLocTemp = 0;
 
-	 MAL_Protocol_Ani_RspSensorInitSuccess(pmpanasonic->status.axleNum);
+	 ProtocolConnect_RspSensorInitSuccess(pmpanasonic->status.axleNum);
 	 }
 	 else
 	 {
@@ -1142,7 +1146,7 @@ void MAL_Motor_AcPanasonic_ProcessSensorInit(MAL_MOTOR_PanasonicHandleTypeDef *p
 
 	 pmpanasonic->setting.DefultLocTemp = 0;
 
-	 MAL_Protocol_Ani_RspSensorInitSuccess(pmpanasonic->status.axleNum);
+	 ProtocolConnect_RspSensorInitSuccess(pmpanasonic->status.axleNum);
 	 }
 	 else
 	 {
@@ -1197,7 +1201,7 @@ void MAL_Motor_AcPanasonic_DefulatLocationProcess(MAL_MOTOR_PanasonicHandleTypeD
 				if (waitCntFlag != HAL_BUSY) {
 					waitCntFlag = HAL_BUSY;
 					pmpanasonic->setting.flag = MAL_SEN_INIT_OK;
-					MAL_Protocol_Ani_RspDefPosi(pmpanasonic->status.axleNum, MAL_SEN_INIT_OK);
+					ProtocolConnect_RspDefPosi(pmpanasonic->status.axleNum, MAL_SEN_INIT_OK);
 
 					CurveFlag = SET;//210413
 				}
@@ -1205,7 +1209,7 @@ void MAL_Motor_AcPanasonic_DefulatLocationProcess(MAL_MOTOR_PanasonicHandleTypeD
 				pmpanasonic->setting.AbsoOffsetFlag = RESET;
 				waitCntFlag = HAL_BUSY;
 				pmpanasonic->setting.flag = MAL_SEN_INIT_OK;
-				MAL_Protocol_Ani_RspDefPosi(pmpanasonic->status.axleNum, MAL_SEN_INIT_OK);
+				ProtocolConnect_RspDefPosi(pmpanasonic->status.axleNum, MAL_SEN_INIT_OK);
 
 				CurveFlag = SET;//210413
 			}
@@ -1286,13 +1290,13 @@ void MAL_Motor_AcPanasonic_DefulatLocationProcess(MAL_MOTOR_PanasonicHandleTypeD
 				if (waitCntFlag != HAL_BUSY) {
 					waitCntFlag = HAL_BUSY;
 					pmpanasonic->setting.flag = MAL_SEN_INIT_OK;
-					MAL_Protocol_Ani_RspDefPosi(pmpanasonic->status.axleNum, MAL_SEN_INIT_OK);
+					ProtocolConnect_RspDefPosi(pmpanasonic->status.axleNum, MAL_SEN_INIT_OK);
 				}
 			} else {
 				pmpanasonic->setting.AbsoOffsetFlag = RESET;
 				waitCntFlag = HAL_BUSY;
 				pmpanasonic->setting.flag = MAL_SEN_INIT_OK;
-				MAL_Protocol_Ani_RspDefPosi(pmpanasonic->status.axleNum, MAL_SEN_INIT_OK);
+				ProtocolConnect_RspDefPosi(pmpanasonic->status.axleNum, MAL_SEN_INIT_OK);
 			}
 			//값이 같으면 끝남
 
@@ -1320,7 +1324,7 @@ void MAL_Motor_AcPanasonic_DefulatLocationProcess(MAL_MOTOR_PanasonicHandleTypeD
 //		} else {
 //			//값이 같으면 끝남
 //			pmpanasonic->setting.flag = MAL_SEN_INIT_OK;
-//			MAL_Protocol_Ani_RspDefPosi(pmpanasonic->status.axleNum, MAL_SEN_INIT_OK);
+//			ProtocolConnect_RspDefPosi(pmpanasonic->status.axleNum, MAL_SEN_INIT_OK);
 //
 //		}
 //	}
@@ -1345,7 +1349,7 @@ void MAL_Motor_AcPanasonic_DefulatLocationProcess(MAL_MOTOR_PanasonicHandleTypeD
 //		} else {
 //			//값이 같으면 끝남
 //			pmpanasonic->setting.flag = MAL_SEN_INIT_OK;
-//			MAL_Protocol_Ani_RspDefPosi(pmpanasonic->status.axleNum, MAL_SEN_INIT_OK);
+//			ProtocolConnect_RspDefPosi(pmpanasonic->status.axleNum, MAL_SEN_INIT_OK);
 //
 //		}
 //	}

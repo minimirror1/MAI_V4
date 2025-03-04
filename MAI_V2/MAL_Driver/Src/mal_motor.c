@@ -14,6 +14,9 @@
 #include "app_pid_init_cmd.h"
 #include "app_pid_inspection_cmd.h"
 
+
+#ifndef PROTOCOL_CONNECT_ACTIVE
+
 #ifdef HAL_MOTOR_MODULE_ENABLED
 extern MAL_MOTOR_HandleTypeDef mmotor[MOTOR_AXLE_CNT];
 extern MAL_MOTOR_PanasonicHandleTypeDef mpanasonic;//210413
@@ -590,5 +593,7 @@ void app_rx_init_sub_pid_status_rqt(uint8_t num, prtc_header_t *pPh, prtc_data_r
 		break;
 	}
 }
+#endif
+
 #endif
 

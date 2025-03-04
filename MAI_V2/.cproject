@@ -42,6 +42,8 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MAI_V2/Component/GM_MOTION/common/GM_NET/PHD/Inc}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MAI_V2/Component/GM_MOTION/common/GM_PRTC/Inc}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MAI_V2/Component/cpp_Motor_Class}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MAI_V2/Component/cpp_tick}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MAI_V2/Component/ProtocolConnect}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.input.1583631875" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.input"/>
 							</tool>
@@ -68,6 +70,8 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MAI_V2/Component/GM_MOTION/common/GM_NET/PHD/Inc}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MAI_V2/Component/GM_MOTION/common/GM_PRTC/Inc}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MAI_V2/Component/cpp_Motor_Class}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MAI_V2/Component/cpp_tick}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MAI_V2/Component/ProtocolConnect}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.1435305358" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c"/>
 							</tool>

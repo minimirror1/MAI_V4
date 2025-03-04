@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "main.h": "c",
+        "protocolconnect.h": "c",
+        "mal_motor_acpanasonic.h": "c"
+    }
+}

@@ -170,7 +170,7 @@ void MAL_Motor_Init(void)
 	//모터 구조체 초기화
 	//MAL_Motor_CallBackInit(&mmotor[0], MAL_MOTOR_AC_PANASONIC );
 
-	MAL_Motor_CallBackInit(&mmotor[0], (uint32_t *)&mpanasonic, MAL_MOTOR_AC_PANASONIC );
+	//MAL_Motor_CallBackInit(&mmotor[0], (uint32_t *)&mpanasonic, MAL_MOTOR_AC_PANASONIC );
 	/*
 	MAL_Motor_ManagerInit((uint32_t *)&mcan1);
 

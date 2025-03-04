@@ -7,7 +7,8 @@
 
 
 #include "main.h"
-#include "mal_motor.h"
+//#include "mal_motor.h"
+#include "ProtocolConnect.h"
 #include "mal_sensor_limit.h"
 
 
@@ -93,7 +94,7 @@ void MAL_SENSOR_LimitTrigger(MAL_SENSOR_Limit_HandleTypeDef *msensor)
 		msensor->status.f_newEvent = SET;
 
 
-		MAL_Protocol_Ani_EventSensorDetect(&msensor->setting.id, (uint16_t)msensor->status.new);
+		ProtocolConnect_EventSensorDetect(&msensor->setting.id, (uint16_t)msensor->status.new);
 	}
 }
 

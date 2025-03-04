@@ -181,7 +181,14 @@ int main(void)
 
 
 	can_init_data_save(&hcan1);
-	MAL_Protocol_Ani_EventBootAlm();
+	//MAL_Protocol_Ani_EventBootAlm();
+	app_tx_init_sub_pid_boot_ctl(
+			0,
+			0,
+			my_can_id_data.id,
+			MASTER_CAN_ID,
+			my_can_id_data.sub_id[0],
+			0);
 
 	//Imonitor_init();
 
