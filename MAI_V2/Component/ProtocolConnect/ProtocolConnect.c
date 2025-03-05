@@ -8,6 +8,7 @@
 #include "main.h"
 #include "ProtocolConnect.h"
 #include "mal_motor_acPanasonic.h"
+#include "mal_systimer.h"
 
 extern MAL_MOTOR_PanasonicHandleTypeDef mpanasonic;
 
@@ -27,12 +28,6 @@ void ProtocolConnect_sensor_detect_ctl(uint8_t axleId, uint8_t cwSen, uint8_t cc
 
 void ProtocolConnect_RspAcAbsoBatteryOk(uint8_t axleId)
 {
-    uint32_t absoCount = 0;
-	if (mpanasonic.setting.flag == MAL_SEN_INIT_OK) {
-		absoCount = mpanasonic.setting.absoCount;
-	} else {
-		absoCount = 0;
-	}
 
 	app_tx_init_sub_pid_status_rsp(
 			0,

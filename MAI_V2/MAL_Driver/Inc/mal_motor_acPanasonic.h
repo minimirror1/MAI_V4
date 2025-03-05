@@ -218,6 +218,11 @@ extern void MAL_Motor_AcPanasonic_SetDefaultLocation(uint32_t *pmpanasonic);
 extern void MAL_Motor_AcPanasonic_SetCounter(uint32_t *pmpanasonic, int16_t counter);
 extern void MAL_Motor_AcPanasonic_SetLoadAbsoCnt(uint32_t *pmpanasonic, uint32_t loadAbsoCnt);//20201103
 
+//Protocol Connect
+extern void MAL_Motor_AcPanasonic_StartSenPosi(MAL_MOTOR_PanasonicHandleTypeDef *pmpanasonic);
+extern uint8_t MAL_Motor_AcPanasonic_SetSettingVal_AbsoluteVal(MAL_MOTOR_PanasonicHandleTypeDef *pmpanasonic, uint8_t SensorDirection, uint16_t OppositeLimit, uint16_t DefaultLocation,
+		uint16_t ReductionRatio);
+
 //get
 extern uint8_t MAL_Motor_AcPanasonic_GetSettingFlag(uint32_t *pmpanasonic);
 extern uint8_t MAL_Motor_AcPanasonic_GetAbsoStatusOk(uint32_t *pmpanasonic);
