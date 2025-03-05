@@ -42,7 +42,7 @@ void ProtocolConnect_RspAcAbsoBatteryOk(uint8_t axleId)
 			my_can_id_data.sub_id[0],
 			0,
 			ABSOLUTE_BATTERY,
-			absoCount
+			mpanasonic.setting.absoStatus	//250305 앱소 카운트 에서 상태 반환으로 변경
 			);
 }
 
