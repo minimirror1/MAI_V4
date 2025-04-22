@@ -11,7 +11,8 @@
 #include "main.h"
 
 
-#define CURVE_TIME	5000
+//#define CURVE_TIME	5000	//초기위치 이동 : 일반 모드
+#define CURVE_TIME	10000		//초기위치 이동 : 느린 모드
 #define CURVE_TIME_QUANTUM 20
 
 typedef struct __MAL_MOTOR_ACPANA_CurveTypeDef
