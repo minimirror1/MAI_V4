@@ -272,13 +272,14 @@ void MAL_Motor_AcPanasonic_232_GetAlmNumber_CallBack(uint8_t *data)
 
 	sprintf(errorStr, "%d.%d", mAc232_Fnc.C9M0.codeMain, mAc232_Fnc.C9M0.codeSub);
 
+	//250305 : 에러 수신 id 변경, master -> broad cast 로 변경.
 	app_tx_error_sub_pid_error_level_ctl(
 			0, 							//CAN1
 			PRIORITY_HIGH, 				//우선순위
 			my_can_id_data.id,			//srcID
-			MASTER_CAN_ID, 				//tarID
+			CAN_ID_BROAD_CAST,			//MASTER_CAN_ID, 				//tarID
 			my_can_id_data.sub_id[0],	//srcSubID
-			0, 							//tarSubID
+			CAN_SUB_ID_BROAD_CAST,		//0, 							//tarSubID
 			2, 							//motorType [2] : AC
 			errorStr					//Error String
 			);
